@@ -49,6 +49,13 @@ string reverseWords(string& str)
             result += ',';
             end = i;
         }
+        if (str[i] == '('){
+            start = i + 1;
+            while (start != end)
+                result += str[start++];
+            result += '(';
+            end = i;
+        }
         i--;
     }
     
