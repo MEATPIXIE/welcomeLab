@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+//#include <cctype>
 using namespace std;
 
 
@@ -21,6 +22,13 @@ string reverseWords(string& str)
     string result = "";
  
     while (i >= 0) {
+        if (str[i] == ' ') {
+            start = i + 1;
+            while (start != end)
+                result += str[start++];
+            result += ' ';
+            end = i;
+        }
         if (str[i] == ' ') {
             start = i + 1;
             while (start != end)
