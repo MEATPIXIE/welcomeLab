@@ -29,11 +29,11 @@ string reverseWords(string& str)
             result += ' ';
             end = i;
         }
-        if (str[i] == '/t') {
+        if (str[i] == '\t') {
             start = i + 1;
             while (start != end)
                 result += str[start++];
-            result += '/t';
+            result += '\t';
             end = i;
         }
         if (str[i] == '$'){
