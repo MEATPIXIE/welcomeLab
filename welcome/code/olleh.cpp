@@ -68,7 +68,7 @@ int main()
     getline(cin, str);
     
     reverseLetters(str);
-    cout << reverseWords(str);
+    cout << reverseWords(str) << endl;
     
 	return 0;
 }
