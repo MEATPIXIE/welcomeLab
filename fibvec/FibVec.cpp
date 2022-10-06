@@ -112,6 +112,8 @@ int FibVec::remove(size_t index){
         mData[i] = mData[i + 1];
     }
     --mCount;
+
+    return 0;
 }
 
 FibVec FibVec::slice(int index, int count){
