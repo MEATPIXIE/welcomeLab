@@ -119,7 +119,7 @@ int FibVec::remove(size_t index){
 FibVec FibVec::slice(size_t index, size_t count) const{
     FibVec *eff = new FibVec;
     int* newVec = new int[count];
-    for(int i = 0; i < count; i++){
+    for(size_t i = 0; i < count; i++){
         newVec[i] = mData[i + index];
     }
     
