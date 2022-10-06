@@ -46,11 +46,11 @@ size_t FibVec::count() const{
 }
 
 void FibVec::insert(int value, size_t index){
-    if ((index < 0) || (index >= mCount)){
+    if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
     if (mCount != mCapacity){
-        for (int i = mCount - 1; i >= index; i--){
+        for (size_t i = mCount - 1; i >= index; i--){
             mData[i + 1] = mData[i];
         }
         mData[index] = value;
@@ -69,7 +69,7 @@ void FibVec::insert(int value, size_t index){
 }
 
 int FibVec::lookup(size_t index){
-    if ((index < 0) || (index >= mCount)){
+    if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
     return mData[index];
