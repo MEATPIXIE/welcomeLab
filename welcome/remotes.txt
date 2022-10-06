@@ -1,0 +1,4 @@
+origin	git@github.com:MEATPIXIE/welcomeLab.git (fetch)
+origin	git@github.com:MEATPIXIE/welcomeLab.git (push)
+upstream	git@github.com:ucsb-cs24/f22.git (fetch)
+upstream	git@github.com:ucsb-cs24/f22.git (push)
