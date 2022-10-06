@@ -140,9 +140,10 @@ ostream& operator <<(ostream& ostr, const FibVec& rhs){
 */
 
 
+/*
 int main()
 {
-    /*
+    
     cout<<"Hello World" << endl;
     FibVec v;
     for(int i = 1; i <= 6; i++){
@@ -152,7 +153,7 @@ int main()
     cout << v << endl;
     v.insert(8, 3);
     cout << v << endl;
-    */
  
     return 0;
 }
+*/
