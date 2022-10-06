@@ -29,7 +29,7 @@ public:
 FibVec::FibVec()
 {
     this->mCount = 0;
-    this->mCapacity = 4;
+    this->mCapacity = 1;
     mData = new int[mCapacity];
 }
 
