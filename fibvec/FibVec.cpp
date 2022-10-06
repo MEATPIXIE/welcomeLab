@@ -68,7 +68,7 @@ void FibVec::insert(int value, size_t index){
     }
 }
 
-int FibVec::lookup(size_t index){
+int FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
@@ -116,7 +116,7 @@ int FibVec::remove(size_t index){
     return 0;
 }
 
-FibVec FibVec::slice(int index, int count){
+FibVec FibVec::slice(size_t index, size_t count) const{
     FibVec *eff = new FibVec;
     int* newVec = new int[count];
     for(int i = 0; i < count; i++){
@@ -124,7 +124,7 @@ FibVec FibVec::slice(int index, int count){
     }
     
     delete[] mData;
-    mData = newVec;
+    //mData = newVec;
     
     return *eff;
 }
@@ -137,13 +137,12 @@ ostream& operator <<(ostream& ostr, const FibVec& rhs){
     }
     return ostr;
 }
-*/
 
 
-/*
+
+
 int main()
 {
-    
     cout<<"Hello World" << endl;
     FibVec v;
     for(int i = 1; i <= 6; i++){
