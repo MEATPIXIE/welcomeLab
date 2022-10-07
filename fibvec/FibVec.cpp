@@ -45,7 +45,7 @@ size_t FibVec::count() const{
     return mCount;
 }
 
-void FibVec::insert(size_t value, size_t index){
+void FibVec::insert(int value, size_t index){
     if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
@@ -82,7 +82,7 @@ void FibVec::pop(){
     --mCount;
 }
 
-void FibVec::push(size_t value){
+void FibVec::push(int value){
     if (mCount < mCapacity){
         mData[mCount] = value;
         ++mCount;

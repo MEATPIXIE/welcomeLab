@@ -14,7 +14,7 @@ public:
     void insert (size_t value, size_t index);
     size_t lookup(size_t index) const;
     void pop();
-    void push(size_t value);
+    void push(int value);
     size_t remove(size_t index);
     FibVec slice(size_t index, size_t count) const;
     
