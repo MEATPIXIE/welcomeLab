@@ -30,7 +30,7 @@ FibVec::FibVec()
 {
     this->mCount = 0;
     this->mCapacity = 1;
-    mData = new int[mCapacity];
+    mData = new size_t[mCapacity];
 }
 
 FibVec::~FibVec(){
@@ -45,7 +45,7 @@ size_t FibVec::count() const{
     return mCount;
 }
 
-void FibVec::insert(int value, size_t index){
+void FibVec::insert(size_t value, size_t index){
     if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
@@ -58,7 +58,7 @@ void FibVec::insert(int value, size_t index){
     }
     else{
         mCapacity *= 2;
-        int* newVec = new int[mCapacity];
+        size_t* newVec = new size_t[mCapacity];
         for (size_t i = 0; i < mCount; i++){
             newVec[i] = mData[i];
         }
@@ -68,7 +68,7 @@ void FibVec::insert(int value, size_t index){
     }
 }
 
-int FibVec::lookup(size_t index) const{
+size_t FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
         throw invalid_argument("out_of_range");
     }
@@ -82,14 +82,14 @@ void FibVec::pop(){
     --mCount;
 }
 
-void FibVec::push(int value){
+void FibVec::push(size_t value){
     if (mCount < mCapacity){
         mData[mCount] = value;
         ++mCount;
     }
     else{
         mCapacity *= 2;
-        int* newVec = new int[mCapacity];
+        size_t* newVec = new size_t[mCapacity];
         for(size_t i = 0; i < mCount; i++){
             newVec[i] = mData[i];
         }
@@ -104,7 +104,7 @@ void FibVec::push(int value){
     }
 }
 
-int FibVec::remove(size_t index){
+size_t FibVec::remove(size_t index){
     if(index >= mCount){
         throw invalid_argument("out_of_range");
     }
@@ -137,10 +137,6 @@ ostream& operator <<(ostream& ostr, const FibVec& rhs){
     }
     return ostr;
 }
-
-
-
-
 int main()
 {
     cout<<"Hello World" << endl;
