@@ -11,7 +11,7 @@ public:
     ~FibVec();
     size_t count() const;
     size_t capacity() const;
-    void insert (size_t value, size_t index);
+    void insert (int value, size_t index);
     size_t lookup(size_t index) const;
     void pop();
     void push(int value);
