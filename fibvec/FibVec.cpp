@@ -67,6 +67,25 @@ void FibVec::insert(int value, size_t index){
         insert(value, index);
     }
 }
+/*
+void Vector::PushBack(int value){
+    if(size < capacity){
+        array[size] = value;
+        size++;
+    }else{
+        capacity = fibo(size);
+        int *newarray = new int[capacity];
+        for (int i=0; i < size; i++){
+            newarray[i] = array[i];
+        }
+        newarray[size] = value;
+        size++;
+        delete[] array;
+        array = newarray;
+    }
+}
+*/
+
 
 size_t FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
@@ -104,6 +123,47 @@ void FibVec::push(int value){
     }
 }
 
+/*
+void FibVec::push(int value){
+    if (mCount < mCapacity){
+        mData[mCount] = value;
+        ++mCount;
+    }
+    else{
+        mCapacity = fibo(size);
+        size_t *newVec = new size_t[mCapacity];
+        for(size_t i = 0; i < mCount; i++){
+            newVec[i] = mData[i];
+        }
+        mData[mCount] = value;
+        mCount++;
+        delete[] mData;
+        mData = newVec;
+        
+    }
+}
+*/
+int FibVec::fibo(int degree){
+    int first = 0;
+    int second = 1;
+    int carry = 0;
+    int space;
+    for(int i = 2; i <= degree + 1; i++){
+        if(i == 1){
+            space = first;
+        } else if(i == 2){
+            space = second;
+        } else {
+            carry = first + second;
+            first = second;
+            second = carry;
+            space = carry;
+        }
+    }
+    return space;
+}
+
+
 size_t FibVec::remove(size_t index){
     if(index >= mCount){
         throw invalid_argument("out_of_range");
@@ -115,20 +175,6 @@ size_t FibVec::remove(size_t index){
 
     return 0;
 }
-
-FibVec FibVec::slice(size_t index, size_t count) const{
-    FibVec *eff = new FibVec;
-    int* newVec = new int[count];
-    for(size_t i = 0; i < count; i++){
-        newVec[i] = mData[i + index];
-    }
-    
-    delete[] mData;
-    //mData = newVec;
-    
-    return *eff;
-}
-
 
 /*
 ostream& operator <<(ostream& ostr, const FibVec& rhs){

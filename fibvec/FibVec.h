@@ -16,8 +16,7 @@ public:
     void pop();
     void push(int value);
     size_t remove(size_t index);
-    FibVec slice(size_t index, size_t count) const;
     
-    
+    int fibo(int degree); 
     friend ostream& operator <<(ostream& ostr, const FibVec& rhs);
 }; 
