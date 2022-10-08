@@ -38,6 +38,29 @@ int FibVec::fibo(int degree){
     }
     return space;
 }
+void FibVec::push(int value){
+    if (mCount < mCapacity){
+        mData[mCount] = value;
+        ++mCount;
+    }
+    else{
+        mCapacity *= 2;
+        /*
+        mCapacity = fibo(degree);
+        degree++;
+        */
+        if (mCapacity >= mCount){
+            size_t *newVec = new size_t[mCapacity];
+            for(size_t i = 0; i < mCount; i++){
+                newVec[i] = mData[i];
+            }
+            newVec[mCount] = value;
+            mCount++;
+            delete[] mData;
+            mData = newVec;
+        }
+    }
+}
 
 
 
@@ -67,40 +90,17 @@ void FibVec::insert(int value, size_t index){
 //wrong
 size_t FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
-        throw invalid_argument("out_of_range");
+        throw out_of_range("out_of_range");
     }
     return mData[index];
 }
 //wrong
 void FibVec::pop(){
     if (mCount == 0){
-        throw invalid_argument("underflow_error");
+        throw underflow_error("underflow_error");
     }
-    --mCount;
-}
-//wrong
-void FibVec::push(int value){
-    if (mCount < mCapacity){
-        mData[mCount] = value;
-        ++mCount;
-    }
-    else{
-        mCapacity *= 2;
-        /*
-        mCapacity = fibo(degree);
-        degree++;
-        */
-        if (mCapacity >= mCount){
-            size_t *newVec = new size_t[mCapacity];
-            for(size_t i = 0; i < mCount; i++){
-                newVec[i] = mData[i];
-            }
-            newVec[mCount] = value;
-            mCount++;
-            delete[] mData;
-            mData = newVec;
-        }
-    }
+    mCount--;
+    //mData[mCount].~FibVec();
 }
 //wrong
 size_t FibVec::remove(size_t index){
