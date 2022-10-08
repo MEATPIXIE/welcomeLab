@@ -6,6 +6,7 @@ private:
     size_t* mData;
     size_t mCount;
     size_t mCapacity;
+    int degree;
 public:
     FibVec();
     ~FibVec();
@@ -20,3 +21,4 @@ public:
     int fibo(int degree); 
     friend ostream& operator <<(ostream& ostr, const FibVec& rhs);
 }; 
+//new
