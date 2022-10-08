@@ -94,7 +94,7 @@ size_t FibVec::lookup(size_t index) const{
     }
     return mData[index];
 }
-//wrong
+//wrong2
 void FibVec::pop(){
     if (mCount == 0){
         throw underflow_error("underflow_error");

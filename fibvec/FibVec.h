@@ -21,4 +21,4 @@ public:
     int fibo(int degree); 
     friend ostream& operator <<(ostream& ostr, const FibVec& rhs);
 }; 
-//newl
+//newww
