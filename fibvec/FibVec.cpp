@@ -8,6 +8,7 @@ FibVec::FibVec()
     this->mCount = 0;
     this->mCapacity = 1;
     mData = new size_t[mCapacity];
+    this->degree = 1;
 }
 FibVec::~FibVec(){
     delete[] mData;
@@ -65,6 +66,7 @@ void FibVec::push(int value){
 
 
 //wrong
+/*
 void FibVec::insert(int value, size_t index){
     if ((index >= mCount)){
         throw invalid_argument("out_of_range");
@@ -87,6 +89,59 @@ void FibVec::insert(int value, size_t index){
         insert(value, index);
     }
 }
+*/
+
+void FibVec::insert(int value, size_t index){
+    if(index > mCount){
+        throw out_of_range("out_of_range");
+    }
+    else{
+        if(mCapacity == mCount){
+            size_t degree = 2;
+            while(mCapacity != Fibonacci(degree)){
+                degree += 1;
+            }
+            
+            size_t* newVec = new size_t[Fibonacci(degree + 1)];
+            
+            for(size_t i = 0; i < mCount + 1; i++){
+                if(i < index){
+                    newVec[i] = mData[i];
+                }
+                else if (i == index){
+                    newVec[i] = value;
+                }
+                else{
+                    newVec[i] = mData[i - 1];
+                }
+            }
+            
+            delete[] mData;
+            mCapacity = Fibonacci(degree + 1);
+            mCount += 1;
+            mData = newVec;
+        }
+        
+        else{
+            size_t* newVec = new size_t[mCapacity];
+            for(size_t i = 0; i < mCount + 1; i++){
+                if(i < index){
+                    newVec[i] = mData[i];
+                }
+                else if (i == index){
+                    newVec[i] = value;
+                }
+                else{
+                    newVec[i] = mData[i - 1];
+                }
+            }
+            delete[] mData;
+            mCount += 1;
+            mData = newVec;
+        }
+    }
+}
+
 //wrong
 size_t FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
@@ -147,7 +202,7 @@ int main()
         //cout <<  "Capacity after is " << v.capacity() << endl << "Count after is " << v.count() << endl << endl;
     }
     cout << v << endl;
-    v.pop();
+    v.insert(8, 0);
     cout << v << endl;
     return 0;
 }
