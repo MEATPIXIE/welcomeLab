@@ -8,7 +8,6 @@ FibVec::FibVec()
     this->mCount = 0;
     this->mCapacity = 1;
     mData = new size_t[mCapacity];
-    this->degree = 1;
 }
 FibVec::~FibVec(){
     delete[] mData;
@@ -19,24 +18,26 @@ size_t FibVec::capacity() const{
 size_t FibVec::count() const{
     return mCount;
 }
-int FibVec::fibo(int degree){
-    int first = 0;
-    int second = 1;
-    int carry = 0;
-    int space;
-    for(int i = 2; i <= degree + 1; i++){
-        if(i == 1){
-            space = first;
-        } else if(i == 2){
-            space = second;
-        } else {
-            carry = first + second;
-            first = second;
-            second = carry;
-            space = carry;
-        }
+size_t FibVec::Fibonacci(size_t n) const{
+    if (n <= 1){
+        return 1;
     }
-    return space;
+    return Fibonacci(n - 1) + Fibonacci(n - 2);
+}
+size_t FibVec::FibResize(size_t count, size_t capacity) const{
+    size_t n = count + 1;
+    size_t i = 1;
+    
+    while(n > capacity){
+        capacity = Fibonacci(i + 1);
+        i++;
+    }
+    
+    if (n < Fibonacci(i - 2)){
+        capacity = Fibonacci(i - 1);
+        i--;
+    }
+    return capacity;
 }
 void FibVec::push(int value){
     if (mCount < mCapacity){
@@ -44,11 +45,10 @@ void FibVec::push(int value){
         ++mCount;
     }
     else{
-        mCapacity *= 2;
-        /*
-        mCapacity = fibo(degree);
-        degree++;
-        */
+        //mCapacity *= 2;
+        
+        mCapacity = FibResize(mCount, mCapacity);
+
         if (mCapacity >= mCount){
             size_t *newVec = new size_t[mCapacity];
             for(size_t i = 0; i < mCount; i++){
@@ -131,7 +131,7 @@ int main()
 {
     FibVec v;
     
-    for(int i = 1; i <= 7; i++){
+    for(int i = 1; i <= 15; i++){
         cout << endl << "Capacity before is " << v.capacity() << endl << "Count before is " << v.count() << endl;
         v.push(i);
         cout << v << endl;
