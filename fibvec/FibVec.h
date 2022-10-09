@@ -13,7 +13,7 @@ public:
     size_t capacity() const;
     void insert (int value, size_t index);
     size_t lookup(size_t index) const;
-    void pop();
+    size_t pop();
     void push(int value);
     size_t remove(size_t index);
     
