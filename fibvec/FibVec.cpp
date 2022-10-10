@@ -137,10 +137,11 @@ size_t FibVec::remove(size_t index){
 }
 
 void FibVec::shrink(){
-    if(mCount < Fibonacci(degree - 1)){
-        mCapacity = Fibonacci(degree);
+    if(mCount < Fibonacci(degree - 2)){
+        mCapacity = Fibonacci(degree - 1);
     }
 }
+
 /*
 ostream& operator <<(ostream& ostr, const FibVec& rhs){
     for(int i = 0; i < rhs.mCount; i++){
@@ -162,11 +163,13 @@ int main()
     }
     cout << endl;
     cout << "Capacity is " << v.capacity() << endl;
-
+    
     for(int i = 0; i <= 8; i++){
         v.pop();
         cout << "Count is " << v.count() << endl;
     }
+    
+    v.pop();
     cout << "Capacity is " << v.capacity() << endl;
 
     
