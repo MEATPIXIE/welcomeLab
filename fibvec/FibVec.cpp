@@ -117,7 +117,7 @@ size_t FibVec::pop(){
             newVec[i] = mData[i];
         }
         mCount--;
-        shrink();
+        mCapacity = shrink();
         delete[] mData;
         mData = newVec;
         return last;
@@ -136,10 +136,11 @@ size_t FibVec::remove(size_t index){
     return 0;
 }
 
-void FibVec::shrink(){
+size_t FibVec::shrink(){
     if(mCount < Fibonacci(degree - 1)){
         mCapacity = Fibonacci(degree );
     }
+    return mCapacity;
 }
 
 /*
@@ -161,12 +162,11 @@ int main()
         v.push(i);
     }
     cout << v << endl;
-
+    cout << v.count() << endl << v.capacity() << endl;
     for(int i = 0; i <= 8; i++){
         v.pop();
     }
     cout << v << endl;
-    
     cout << v.count() << endl << v.capacity() << endl;
     
     return 0;
