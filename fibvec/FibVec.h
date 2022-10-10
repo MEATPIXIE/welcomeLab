@@ -3,7 +3,7 @@ using namespace std;
 
 class FibVec{
 private: 
-    size_t* mData;
+    int* mData;
     size_t mCount;
     size_t mCapacity;
     int degree;
@@ -22,4 +22,4 @@ public:
     size_t FibResize(size_t count, size_t capacity) const;
     friend ostream& operator <<(ostream& ostr, const FibVec& rhs);
 };
-//54321
+//0007

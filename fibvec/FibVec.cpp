@@ -7,7 +7,7 @@ FibVec::FibVec()
 {
     this->mCount = 0;
     this->mCapacity = 1;
-    mData = new size_t[mCapacity];
+    mData = new int[mCapacity];
     this->degree = 1;
 }
 FibVec::~FibVec(){
@@ -46,12 +46,9 @@ void FibVec::push(int value){
         ++mCount;
     }
     else{
-        //mCapacity *= 2;
-        
         mCapacity = FibResize(mCount, mCapacity);
-
         if (mCapacity >= mCount){
-            size_t *newVec = new size_t[mCapacity];
+            int *newVec = new int[mCapacity];
             for(size_t i = 0; i < mCount; i++){
                 newVec[i] = mData[i];
             }
@@ -63,67 +60,30 @@ void FibVec::push(int value){
     }
 }
 
-
-
-//wrong
-/*
-void FibVec::insert(int value, size_t index){
-    if ((index >= mCount)){
-        throw invalid_argument("out_of_range");
-    }
-    if (mCount != mCapacity){
-        for (size_t i = mCount - 1; i >= index; i--){
-            mData[i + 1] = mData[i];
-        }
-        mData[index] = value;
-        ++mCount;
-    }
-    else{
-        mCapacity *= 2;
-        size_t* newVec = new size_t[mCapacity];
-        for (size_t i = 0; i < mCount; i++){
-            newVec[i] = mData[i];
-        }
-        delete[] mData;
-        mData = newVec;
-        insert(value, index);
-    }
-}
-*/
-
 void FibVec::insert(int value, size_t index){
     if(index > mCount){
         throw out_of_range("out_of_range");
     }
-    else{
-        if(mCapacity == mCount){
-            size_t degree = 2;
-            while(mCapacity != Fibonacci(degree)){
-                degree += 1;
+    if (mCount < mCapacity){
+        int* newVec = new int[mCapacity];
+        for(size_t i = 0; i < mCount + 1; i++){
+            if(i < index){
+                newVec[i] = mData[i];
             }
-            
-            size_t* newVec = new size_t[Fibonacci(degree + 1)];
-            
-            for(size_t i = 0; i < mCount + 1; i++){
-                if(i < index){
-                    newVec[i] = mData[i];
-                }
-                else if (i == index){
-                    newVec[i] = value;
-                }
-                else{
-                    newVec[i] = mData[i - 1];
-                }
+            else if (i == index){
+                newVec[i] = value;
             }
-            
-            delete[] mData;
-            mCapacity = Fibonacci(degree + 1);
-            mCount += 1;
-            mData = newVec;
+            else{
+                newVec[i] = mData[i - 1];
+            }
         }
-        
-        else{
-            size_t* newVec = new size_t[mCapacity];
+        delete[] mData;
+        mCount += 1;
+        mData = newVec;
+    }else{
+        mCapacity = FibResize(mCount, mCapacity);
+        if(mCapacity >= mCount){
+            int* newVec = new int[mCapacity];
             for(size_t i = 0; i < mCount + 1; i++){
                 if(i < index){
                     newVec[i] = mData[i];
@@ -135,9 +95,9 @@ void FibVec::insert(int value, size_t index){
                     newVec[i] = mData[i - 1];
                 }
             }
-            delete[] mData;
-            mCount += 1;
-            mData = newVec;
+        delete[] mData;
+        mCount += 1;
+        mData = newVec;
         }
     }
 }
@@ -155,7 +115,7 @@ size_t FibVec::pop(){
         throw underflow_error("underflow_error");
     }else{
         size_t last = mData[mCount - 1];
-        size_t *newVec = new size_t[mCapacity];
+        int *newVec = new int[mCapacity];
         for(size_t i = 0; i < mCount; i++){
             newVec[i] = mData[i];
         }
@@ -194,16 +154,13 @@ int main()
 {
     FibVec v;
     
-    
-    for(int i = 1; i <= 5; i++){
+    for(int i = 0; i <= 15; i++){
         //cout << endl << "Capacity before is " << v.capacity() << endl << "Count before is " << v.count() << endl;
-        v.push(i);
-        //cout << v << endl;
+        v.insert(i, i);
+        cout << v << endl;
         //cout <<  "Capacity after is " << v.capacity() << endl << "Count after is " << v.count() << endl << endl;
     }
-    cout << v << endl;
-    v.insert(8, 0);
-    cout << v << endl;
+    //cout << v << endl;
     return 0;
 }
 */
