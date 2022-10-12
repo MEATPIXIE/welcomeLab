@@ -5,16 +5,13 @@ using namespace std;
 
 FibVec::FibVec()
 {
-    this->mCount = 0;
-    this->mCapacity = 1;
+    mCount = 0;
+    mCapacity = 1;
+    mCapacity2 = 1;
     mData = new int[mCapacity];
-    this->degree = 0;
 }
 FibVec::~FibVec(){
     delete[] mData;
-}
-int FibVec::degre(){
-    return degree;
 }
 size_t FibVec::capacity() const{
     return mCapacity;
@@ -22,30 +19,43 @@ size_t FibVec::capacity() const{
 size_t FibVec::count() const{
     return mCount;
 }
-size_t FibVec::Fibonacci(size_t n) const{
-    if (n <= 1){
-        return 1;
+
+
+void FibVec::FibDown(){
+    size_t temp = mCapacity - mCapacity2;
+    mCapacity = mCapacity2;
+    mCapacity2 = temp;
+    int* newVec = new int[mCapacity];
+    for(size_t i = 0; i <mCapacity; i++){
+        newVec[i] = mData[i];
     }
-    return Fibonacci(n - 1) + Fibonacci(n - 2);
+    delete[] mData;
+    mData = newVec;
 }
-size_t FibVec::FibResize(size_t count, size_t capacity) const{
-    size_t n = count + 1;
-    size_t i = 1;
-    
-    while(n > capacity){
-        capacity = Fibonacci(i + 1);
-        i++;
+
+void FibVec::FibUp(int value, size_t index){
+    size_t temp = mCapacity;
+    mCapacity += mCapacity2;
+    mCapacity2 = temp;
+    int* newVec = new int[mCapacity];
+    for (size_t i = 0; i < index; i++){
+        newVec[i] = mData[i];
     }
-    return capacity;
+    newVec[index++] = value;
+    for (index; index <= mCapacity2; index++){
+        newVec[index] = mData[index - 1];
+    }
+    delete[] mData;
+    mData = newVec;
 }
+
 void FibVec::push(int value){
     if (mCount < mCapacity){
         mData[mCount] = value;
         mCount++;
     }
     else{
-        mCapacity = FibResize(mCount, mCapacity);
-        degree++;
+        this->FibUp(value, mCapacity);
         if (mCapacity >= mCount){
             int *newVec = new int[mCapacity];
             for(size_t i = 0; i < mCount; i++){
@@ -79,7 +89,7 @@ void FibVec::insert(int value, size_t index){
         mCount += 1;
         mData = newVec;
     }else{
-        mCapacity = FibResize(mCount, mCapacity);
+        this->FibUp(value, mCapacity);
         if(mCapacity >= mCount){
             int* newVec = new int[mCapacity];
             for(size_t i = 0; i < mCount + 1; i++){
@@ -110,18 +120,26 @@ size_t FibVec::lookup(size_t index) const{
 size_t FibVec::pop(){
     if (mCount == 0){
         throw underflow_error("underflow_error");
-    }else{
+    }
+    int what = mData[mCount - 1];
+    if (mCount == mCapacity - mCapacity2){
+        this->FibDown();
+    }
+    mCount--;
+    return what;
+    /*
+    else{
         size_t last = mData[mCount - 1];
         int *newVec = new int[mCapacity];
         for(size_t i = 0; i < mCount; i++){
             newVec[i] = mData[i];
         }
         mCount--;
-        mCapacity = shrink();
         delete[] mData;
         mData = newVec;
         return last;
     }
+    */
 }
 //wrong
 size_t FibVec::remove(size_t index){
@@ -134,13 +152,6 @@ size_t FibVec::remove(size_t index){
     --mCount;
 
     return 0;
-}
-
-size_t FibVec::shrink(){
-    if(mCount < Fibonacci(degree - 1)){
-        mCapacity = Fibonacci(degree );
-    }
-    return mCapacity;
 }
 
 /*
@@ -160,8 +171,10 @@ int main()
     
     for(int i = 0; i <= 12; i++){
         v.push(i);
+        cout << v << endl;
     }
-    cout << v << endl;
+    //cout << v << endl;
+    
     cout << v.count() << endl << v.capacity() << endl;
     for(int i = 0; i <= 8; i++){
         v.pop();
