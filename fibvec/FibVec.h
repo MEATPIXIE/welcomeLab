@@ -18,7 +18,7 @@ public:
     size_t lookup(size_t index) const;
     size_t pop();
     void push(int value);
-    size_t remove(size_t index);
+    int remove(size_t index);
     
     friend ostream& operator <<(ostream& ostr, const FibVec& rhs);
 };

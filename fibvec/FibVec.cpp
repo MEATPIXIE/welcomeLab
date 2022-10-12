@@ -127,7 +127,7 @@ size_t FibVec::pop(){
     return what;
 }
 //wrong
-size_t FibVec::remove(size_t index){
+int FibVec::remove(size_t index){
     if(index >= mCount){
         throw out_of_range("out_of_range");
     }
