@@ -42,7 +42,7 @@ void FibVec::FibUp(int value, size_t index){
         newVec[i] = mData[i];
     }
     newVec[index++] = value;
-    for (index; index <= mCapacity2; index++){
+    for (; index <= mCapacity2; index++){
         newVec[index] = mData[index - 1];
     }
     delete[] mData;
