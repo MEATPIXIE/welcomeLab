@@ -20,7 +20,6 @@ size_t FibVec::count() const{
     return mCount;
 }
 
-
 void FibVec::FibDown(){
     size_t temp = mCapacity - mCapacity2;
     mCapacity = mCapacity2;
@@ -116,7 +115,6 @@ size_t FibVec::lookup(size_t index) const{
     return mData[index];
 }
 
-//wrong2
 size_t FibVec::pop(){
     if (mCount == 0){
         throw underflow_error("underflow_error");
@@ -127,31 +125,21 @@ size_t FibVec::pop(){
     }
     mCount--;
     return what;
-    /*
-    else{
-        size_t last = mData[mCount - 1];
-        int *newVec = new int[mCapacity];
-        for(size_t i = 0; i < mCount; i++){
-            newVec[i] = mData[i];
-        }
-        mCount--;
-        delete[] mData;
-        mData = newVec;
-        return last;
-    }
-    */
 }
 //wrong
 size_t FibVec::remove(size_t index){
     if(index >= mCount){
         throw out_of_range("out_of_range");
     }
+    int huh = mData[index];
     for (size_t i = index; i < mCount - 1; i++){
         mData[i] = mData[i + 1];
     }
-    --mCount;
+    if (mCount == mCapacity - mCapacity2){
+        this->FibDown();
+    }
 
-    return 0;
+    return huh;
 }
 
 /*
@@ -185,4 +173,4 @@ int main()
     return 0;
 }
 */
-//4343
+//please
