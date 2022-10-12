@@ -20,7 +20,7 @@ List::List(const List& other){
 List::List(List&& other){
     this->head = other.head;
     //this->head->next = other.head->next;
-    other.head = NULL
+    other.head = NULL;
 }
 
 List::~List(){
