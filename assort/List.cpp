@@ -5,21 +5,18 @@
 using namespace std;
 
 List::List(){
-    head = NULL;
+    head->data = "";
+    head->next = nullptr;
 }
 
 List::List(const List& other){
-    /*
-    str = new char[strlen(other.str) + 1];
-    strcpy(str, other.str);
-    str[strlen(other.str)] = '\0';
-    */
-    cout <<"efe";
-}
+    head = other.head;
+    head->nexr = other.head->next;
+} 
 
 List::List(List&& other){
-    head = other.head;
-    other.head = NULL;
+    this->head->data = other.head->data;
+    this->head->next = other.head->next;
 }
 
 List::~List(){
