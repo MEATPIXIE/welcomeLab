@@ -128,7 +128,7 @@ size_t FibVec::pop(){
 }
 //wrong
 int FibVec::remove(size_t index){
-    if(index >= mCount){
+    if(index > mCount || mCount == 0){
         throw out_of_range("out_of_range");
     }
     int huh = mData[index];
