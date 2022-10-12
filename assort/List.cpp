@@ -18,8 +18,9 @@ List::List(const List& other){
 } 
 
 List::List(List&& other){
-    this->head->data = other.head->data;
-    this->head->next = other.head->next;
+    this->head = other.head;
+    //this->head->next = other.head->next;
+    other.head = NULL
 }
 
 List::~List(){
