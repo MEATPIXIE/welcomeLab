@@ -5,8 +5,11 @@
 using namespace std;
 
 List::List(){
+    /*
     head->data = "";
     head->next = nullptr;
+    */
+    head = NULL;
 }
 
 List::List(const List& other){
