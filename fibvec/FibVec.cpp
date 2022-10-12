@@ -13,9 +13,11 @@ FibVec::FibVec()
 FibVec::~FibVec(){
     delete[] mData;
 }
+
 size_t FibVec::capacity() const{
     return mCapacity;
 }
+
 size_t FibVec::count() const{
     return mCount;
 }
@@ -67,6 +69,7 @@ void FibVec::push(int value){
         }
     }
 }
+
 void FibVec::insert(int value, size_t index){
     if(index > mCount){
         throw out_of_range("out_of_range");
@@ -108,6 +111,7 @@ void FibVec::insert(int value, size_t index){
         }
     }
 }
+
 size_t FibVec::lookup(size_t index) const{
     if ((index >= mCount)){
         throw out_of_range("out_of_range");
@@ -128,16 +132,14 @@ size_t FibVec::pop(){
 }
 //wrong
 int FibVec::remove(size_t index){
-    if(index > mCount || mCount == 0){
+    if(index > mCount - 1 || mCount == 0){
         throw out_of_range("out_of_range");
     }
     int huh = mData[index];
     for (size_t i = index; i < mCount - 1; i++){
         mData[i] = mData[i + 1];
     }
-    if (mCount == mCapacity - mCapacity2){
-        this->FibDown();
-    }
+    if (mCount == mCapacity - mCapacity2) this->FibDown();
 
     return huh;
 }
