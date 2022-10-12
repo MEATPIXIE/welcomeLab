@@ -11,7 +11,7 @@ List::List(){
 
 List::List(const List& other){
     head = other.head;
-    head->nexr = other.head->next;
+    head->next = other.head->next;
 } 
 
 List::List(List&& other){
