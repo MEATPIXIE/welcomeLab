@@ -139,8 +139,10 @@ int FibVec::remove(size_t index){
     for (size_t i = index; i < mCount - 1; i++){
         mData[i] = mData[i + 1];
     }
-    if (mCount == mCapacity - mCapacity2) this->FibDown();
-
+    if (mCount == mCapacity - mCapacity2){
+        this->FibDown();
+    } 
+    mCount--;
     return huh;
 }
 
