@@ -8,13 +8,14 @@ List::List(){
     head = NULL;
 }
 
-/*
 List::List(const List& other){
+    /*
     str = new char[strlen(other.str) + 1];
     strcpy(str, other.str);
     str[strlen(other.str)] = '\0';
+    */
+    cout <<"efe";
 }
-*/
 
 List::List(List&& other){
     head = other.head;
