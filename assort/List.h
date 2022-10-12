@@ -11,7 +11,7 @@ struct Node {
   std::string data;
   Node*       next;
 };
- 
+
 
 class List {
   Node* head;
