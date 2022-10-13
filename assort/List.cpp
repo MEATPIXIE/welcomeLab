@@ -130,7 +130,6 @@ string List::remove(size_t index){
     }
     string mine = current->next->data;
     delete current->next;
-    cout << endl;
     current->next = NULL;
     return mine;
 }
