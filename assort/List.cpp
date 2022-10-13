@@ -111,7 +111,7 @@ void List::print( bool reverse) const{
 			node = node->next;
     	}
 	}
-    cout << "]";
+    cout << "]" << endl;
 }
 
 string List::remove(size_t index){
