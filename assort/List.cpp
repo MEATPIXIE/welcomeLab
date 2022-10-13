@@ -74,7 +74,7 @@ void List::insert(const std::string& value){
 
 //impliment index > nodes throw
 const string& List::lookup(size_t index) const{
-    int what = 0;
+    size_t what = 0;
     Node* temp = head;
     while(temp != NULL){
         if(what == index){
