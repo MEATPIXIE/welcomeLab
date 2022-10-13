@@ -35,11 +35,11 @@ List::List(List&& other){
 }
 
 List::~List(){
-    Node *temp = head;
-    while (temp != NULL){
-        Node *temp2 = temp->next;
+    Node* current = head;
+    while (current != NULL){
+        Node* temp = current;
+        current = current->next;
         delete temp;
-        temp = temp2;
     }
 }
 
@@ -50,7 +50,6 @@ size_t List::count() const{
 void List::insert(const std::string& value){
     cout << "ewe";
 }  
-
 
 const string& List::lookup(size_t index) const{
     return NULL;
