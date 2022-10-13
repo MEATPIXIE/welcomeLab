@@ -9,8 +9,24 @@ List::List(){
 }
 
 List::List(const List& other){
-    head = other.head;
-    head->next = other.head->next;
+    if (other.head == NULL){
+        return;
+    }
+    Node* temp = other.head;
+    Node* current = NULL;
+    head = new Node;
+    head->data = temp->data;
+    head->next = NULL;
+    current = head;
+    temp = temp->next;
+
+    while(temp != NULL){
+        current->next = new Node;
+        current = current->next;
+        current->data = temp->data;
+        current->next = NULL;
+        temp = temp->next;
+    }
 } 
 
 List::List(List&& other){
