@@ -5,10 +5,6 @@
 using namespace std;
 
 List::List(){
-    /*
-    head->data = "";
-    head->next = nullptr;
-    */
     head = NULL;
 }
 
@@ -19,7 +15,6 @@ List::List(const List& other){
 
 List::List(List&& other){
     this->head = other.head;
-    //this->head->next = other.head->next;
     other.head = NULL;
 }
 
