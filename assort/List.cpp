@@ -15,7 +15,7 @@ List::List(const List& other){
     if (other.head == NULL){
         head = NULL;
     }
-    if (temp->data == NULL){
+    if (temp->head == NULL){
         return;
     }
     head = new Node;
@@ -130,9 +130,11 @@ void List::print(bool reverse) const{
     }
 }
 
+//anywhere
 string List::remove(size_t index){
     Node* temp = head;
-    if(head == NULL){
+    size_t num = count();
+    if(index >= num){
         throw out_of_range("out_of_range");
     }
     if(index == 0){
@@ -150,6 +152,7 @@ string List::remove(size_t index){
     current->next = NULL;
     return mine;
 }
+
 
 size_t List::remove(const std::string& value){
     size_t yours = 0;
