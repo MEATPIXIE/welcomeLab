@@ -93,6 +93,18 @@ const string& List::lookup(size_t index) const{
     return NULL;
 }
 
+void printReverse(Node* head, size_t heirs)
+{
+    if (head == NULL){
+        return;
+    }
+    printReverse(head->next, heirs + 1);
+    cout << head->data;
+    if(heirs > 0){
+        cout << ", ";
+    }
+}
+
 void List::print(bool reverse) const{
     Node* current = this->head;
     if(reverse == false){
@@ -106,6 +118,12 @@ void List::print(bool reverse) const{
         }
         theirs += "]";
         cout << theirs << endl;
+    }
+    if(reverse == true){
+        cout << "[";
+        size_t heirs = 0;
+        printReverse(current, heirs);
+        cout << "]" << endl;
     }
 }
 
@@ -163,8 +181,7 @@ int main(){
     a.insert("Bashful");
     a.insert("Sneezy");
     a.insert("Dopey");
-    a.print();
     
-    cout << endl << a.lookup(7);
+    a.print();
 }
 */
