@@ -129,7 +129,7 @@ void List::print(bool reverse) const{
 
 string List::remove(size_t index){
     if(head == NULL){
-        return NULL;
+        throw out_of_range("out_of_range");
     }
     if(index == 0){
         string mine = head->data;
