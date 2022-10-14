@@ -86,32 +86,20 @@ const string& List::lookup(size_t index) const{
     return NULL;
 }
 
-void List::print( bool reverse) const{
-    cout << "[";
-	if(reverse == false){
-		Node* node = this->head;
-		while (node != NULL) {
-        	cout<<node->data<<" ";
-			node = node->next;
-    	}
-	}else{
-		Node* node = this->head;
-		Node* current = node;
-    	Node *prev = NULL, *next = NULL;
- 
-    	while (current != NULL) {
-        	next = current->next;
-        	current->next = prev;
-        	prev = current;
-        	current = next;
-    	}
-    	node = prev;
-		while (node != NULL) {
-        	cout<<node->data<<" ";
-			node = node->next;
-    	}
-	}
-    cout << "]" << endl;
+void List::print(bool reverse) const{
+    Node* current = this->head;
+    if(reverse == false){
+        string theirs = "[";
+        while(current != NULL){
+            theirs += current->data;
+            if(current->next){
+                theirs+=", ";
+            }
+            current = current->next;
+        }
+        theirs += "]";
+        cout << theirs << endl;
+    }
 }
 
 string List::remove(size_t index){
@@ -160,7 +148,15 @@ size_t List::remove(const std::string& value){
 
 /*
 int main(){
-    cout << "hello" << endl;
+    List a;
+    a.insert("Bashful");
+    a.insert("Doc");
+    a.insert("Dopey");
+    a.insert("Grumpy");
+    a.insert("Happy");
+    a.insert("Sleepy");
+    a.insert("Sneezy");
+    a.print();
 }
 
 void List::PushBack(int value){
@@ -174,16 +170,5 @@ void List::PushBack(int value){
         }
         List Node* Temp = new List()
     }
-}
-
-ostream& operator <<(ostream& ostr, const List& rhs){
-    for(int i = 0; i < rhs.mCount; i++){
-        ostr << rhs.mData[i] << " ";
-    }
-    ostr << " || ";
-    for(int i = rhs.mCount; i < rhs.mCapacity; i++){
-        ostr << rhs.mData[i] << " ";
-    }
-    return ostr;
 }
 */
