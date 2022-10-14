@@ -2,6 +2,7 @@
 #include <cstring>
 #include <iostream>
 #include <cstddef>
+#include <stdexcept>
 using namespace std;
 
 List::List(){
@@ -9,11 +10,11 @@ List::List(){
 }
 
 List::List(const List& other){
+    Node* temp = other.head;
+    Node* current = NULL;
     if (other.head == NULL){
         head = NULL;
     }
-    Node* temp = other.head;
-    Node* current = NULL;
     head = new Node;
     head->data = temp->data;
     head->next = NULL;
@@ -88,6 +89,7 @@ const string& List::lookup(size_t index) const{
         what++;
         temp = temp->next;
     }
+    throw out_of_range("out_of_range");
     return NULL;
 }
 
@@ -162,5 +164,7 @@ int main(){
     a.insert("Sneezy");
     a.insert("Dopey");
     a.print();
+    
+    cout << endl << a.lookup(7);
 }
 */
