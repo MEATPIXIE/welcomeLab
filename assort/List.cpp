@@ -128,13 +128,14 @@ void List::print(bool reverse) const{
 }
 
 string List::remove(size_t index){
+    Node* temp = head
     if(head == NULL){
         throw out_of_range("out_of_range");
     }
     if(index == 0){
-        string mine = head->data;
-        delete head;
-        head = NULL;
+        head = temp->next;
+        string mine = temp->data;
+        delete temp;
         return mine;
     }
     Node* current = head;
