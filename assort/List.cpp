@@ -61,16 +61,21 @@ void List::insert(const std::string& value){
     Node* temp = new Node;
     temp->data = value;
     temp->next = NULL;
+    Node* current = head;
     if(head == NULL){
         head = temp;
-    }else{
-        Node* current = head;
-        while(current->next != NULL){
-            current = current->next;
-        }
-        current->next = temp;
     }
-}  
+    if (head->data >= temp->data){
+        head = temp;
+        head->next = current;
+        return;
+    }
+    while(current->next != NULL && current->next->data < temp->data){
+        current = current->next;
+    }
+    temp->next = current->next;
+    current->next = temp;
+}
 
 //impliment index > nodes throw
 const string& List::lookup(size_t index) const{
@@ -149,26 +154,13 @@ size_t List::remove(const std::string& value){
 /*
 int main(){
     List a;
-    a.insert("Bashful");
     a.insert("Doc");
-    a.insert("Dopey");
     a.insert("Grumpy");
     a.insert("Happy");
     a.insert("Sleepy");
+    a.insert("Bashful");
     a.insert("Sneezy");
+    a.insert("Dopey");
     a.print();
-}
-
-void List::PushBack(int value){
-    if(head == NULL){
-        head = new List(value);
-    }
-    else{
-        List* Current = head;
-        while(Current->next != NULL){
-            Current = Current-next;
-        }
-        List Node* Temp = new List()
-    }
 }
 */
