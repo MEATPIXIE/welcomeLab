@@ -15,6 +15,9 @@ List::List(const List& other){
     if (other.head == NULL){
         head = NULL;
     }
+    if (temp.head == NULL){
+        return;
+    }
     head = new Node;
     head->data = temp->data;
     head->next = NULL;
