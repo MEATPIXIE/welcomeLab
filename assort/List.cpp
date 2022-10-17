@@ -14,24 +14,21 @@ List::List(const List& other){
     Node* current = NULL;
     if (other.head == NULL){
         head = NULL;
-    }
-    /*
-    if (temp->head == NULL){
-        return;
-    }
-    */
-    head = new Node;
-    head->data = temp->data;
-    head->next = NULL;
-    current = head;
-    temp = temp->next;
+    }else{
 
-    while(temp != NULL){
-        current->next = new Node;
-        current = current->next;
-        current->data = temp->data;
-        current->next = NULL;
+        head = new Node;
+        head->data = temp->data;
+        head->next = NULL;
+        current = head;
         temp = temp->next;
+
+        while(temp != NULL){
+            current->next = new Node;
+            current = current->next;
+            current->data = temp->data;
+            current->next = NULL;
+            temp = temp->next;
+        }
     }
 } 
 
