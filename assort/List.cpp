@@ -130,29 +130,40 @@ void List::print(bool reverse) const{
 }
 
 string List::remove(size_t index){
-    Node* temp = head;
-    size_t num = count();
-    if(index >= num){
+    string mine;
+    Node* current = head;
+    Node* temp;
+    size_t num = 0;
+    
+    if(index >= count()){
         throw out_of_range("out_of_range");
     }
     else if(index == 0){
         head = temp->next;
-        string mine = temp->data;
+        mine = temp->data;
         delete temp;
         return mine;
     }
+    
     else{
-        Node* current = head;
-        for (size_t i = 0; i < index - 1; i++) {
-            current = current->next;
+        while(current != NULL){
+            if(num == index - 1){
+                mine = current->next->data;
+                temp = current->next->next;
+                delete current->next;
+                current->next = temp;
+                return mine;
+            }
+            else{
+                current = current->next;
+                num++;
+            }
         }
-        string mine = current->next->data;
-        delete current->next;
-        current->next = NULL;
-        return mine;
+        throw out_of_range("out_of_range");
     }
-    throw out_of_range("out_of_range");
+    return 0;
 }
+
 
 
 size_t List::remove(const std::string& value){
