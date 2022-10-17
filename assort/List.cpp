@@ -132,7 +132,7 @@ void List::print(bool reverse) const{
 string List::remove(size_t index){
     string mine;
     Node* current = head;
-    Node* temp;
+    Node* temp = head;
     size_t num = 0;
     
     if(index >= count()){
