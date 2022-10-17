@@ -151,7 +151,7 @@ string List::remove(size_t index){
         current->next = NULL;
         return mine;
     }
-    //throw out_of_range("out_of_range");
+    throw out_of_range("out_of_range");
 }
 
 
