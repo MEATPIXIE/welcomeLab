@@ -6,7 +6,7 @@ Set::Set(){
 }
 
 Set::Set(const Set& other){
-    mRoot = Null
+    mRoot = NULL;
     /*
     Node* temp = other.head;
     Node* current = NULL;
