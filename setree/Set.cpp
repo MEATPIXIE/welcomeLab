@@ -6,8 +6,7 @@ Set::Set(){
 }
 
 Set::Set(const Set& other){
-    Node* temp = other.mRoot;
-    Node* current = NULL;
+    mRoot = Null
     /*
     Node* temp = other.head;
     Node* current = NULL;
@@ -38,7 +37,7 @@ Set::Set(Set&& other){
 }
 
 Set::~Set(){
-    Node* current = mRoot;
+    mRoot = NULL;
     /*
     while (current != NULL){
         Node* next = current->next;
