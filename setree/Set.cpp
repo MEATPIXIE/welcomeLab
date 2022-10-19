@@ -6,7 +6,7 @@ Set::Set(){
 }
 
 Set::Set(const Set& other){
-    mRoot = NULL;
+    mRoot = other.mRoot;
     /*
     Node* temp = other.head;
     Node* current = NULL;
@@ -32,12 +32,12 @@ Set::Set(const Set& other){
 }
 
 Set::Set(Set&& other){
-    this->mRoot = other.mRoot;
+    mRoot = other.mRoot;
     other.mRoot = NULL;
 }
 
 Set::~Set(){
-    mRoot = NULL;
+    delete mRoot;
     /*
     while (current != NULL){
         Node* next = current->next;
@@ -58,20 +58,15 @@ bool Set::contains(const std::string& value) const{
     return false;
 }
 
-size_t Set::count() const{
-    return 0;
-    /*
-    if(mRoot == NULL){
+size_t Count(Node *root){
+    if(root == NULL){
         return 0;
     }
-    Node* temp = mR;
-    size_t yo = 0;
-    while(temp != NULL){
-        yo++;
-        temp = temp->next;
-    }
-    return yo; 
-    */
+    return 1 + Count(root->left) + Count(root->right);
+}
+
+size_t Set::count() const{
+    return Count(mRoot);
 }
 
 void Set::debug(){
@@ -79,26 +74,37 @@ void Set::debug(){
 }
 
 size_t Set::insert(const std::string& value){
-    return 0;
-    /*
-    Node* temp = new Node;
-    temp->data = value;
-    temp->next = NULL;
-    Node* current = head;
-    if(head == NULL){
-        head = temp;
-    }
-    if (head->data >= temp->data){
-        head = temp;
-        head->next = current;
-        return;
-    }
-    while(current->next != NULL && current->next->data < temp->data){
-        current = current->next;
-    }
-    temp->next = current->next;
-    current->next = temp;
-    */
+	Node* newNode = new Node;
+	newNode->data = value;
+	newNode->left = nullptr;
+	newNode->right = nullptr;
+	if (mRoot == nullptr){
+		mRoot = newNode;
+		return 1;
+	}
+	Node* curr = mRoot;
+	while (curr != nullptr){
+		if (value < curr->data){
+			if (curr->left == nullptr){
+				curr->left = newNode;
+				return 1;
+			}else{
+				curr = curr->left;
+			}
+		}
+		else if (value > curr->data){
+			if (curr->right == nullptr){
+				curr->right = newNode;
+				return 1;
+			}else{
+				curr = curr->right;
+			}
+		}
+		else{
+			return 0;
+		}
+	}
+	return 0;
 }
 
 const std::string& Set::lookup(size_t n) const{
