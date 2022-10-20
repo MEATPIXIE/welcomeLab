@@ -80,20 +80,6 @@ void Set::debug(){
     return;
 }
 
-
-Node* insertHelper(Node* node, const std::string& value, Node* newNode){
-    if (node == NULL){
-        node == newNode;
-    }
-    else if(value < node->data){
-        node->left = insertHelper(node->left, value, newNode);
-    }
-    else if(value > node->data){
-        node->right = insertHelper(node->right, value, newNode);
-    }
-    return node;
-}
-
 size_t Set::insert(const std::string& value){
     
 	Node* newNode = new Node;
