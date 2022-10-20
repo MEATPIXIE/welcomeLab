@@ -8,16 +8,16 @@ Set::Set(){
 Set::Set(const Set& other){
     mRoot = other.mRoot;
     /*
-    Node* temp = other.head;
+    Node* temp = other.mRoot;
     Node* current = NULL;
-    if (other.head == NULL){
-        head = NULL;
+    if (other.mRoot == NULL){
+        mRoot = NULL;
     }else{
 
-        head = new Node;
-        head->data = temp->data;
-        head->next = NULL;
-        current = head;
+        mRoot = new Node;
+        mRoot->data = temp->data;
+        mRoot->next = NULL;
+        current = mRoot;
         temp = temp->next;
 
         while(temp != NULL){
@@ -48,16 +48,23 @@ Set::~Set(){
     */
 }
 
-
-
 size_t Set::clear(){
     return 0;
 }
-
 bool Set::contains(const std::string& value) const{
+    Node *node = mRoot;
+    while (node != nullptr){
+        if (value == node->data){
+            return true;
+        }
+        if (value < node->data){
+            node = node->left;
+        }else{
+            node = node->right;
+        }
+    }
     return false;
 }
-
 size_t Count(Node *root){
     if(root == NULL){
         return 0;
@@ -73,7 +80,22 @@ void Set::debug(){
     return;
 }
 
+
+Node* insertHelper(Node* node, const std::string& value, Node* newNode){
+    if (node == NULL){
+        node == newNode;
+    }
+    else if(value < node->data){
+        node->left = insertHelper(node->left, value, newNode);
+    }
+    else if(value > node->data){
+        node->right = insertHelper(node->right, value, newNode);
+    }
+    return node;
+}
+
 size_t Set::insert(const std::string& value){
+    
 	Node* newNode = new Node;
 	newNode->data = value;
 	newNode->left = nullptr;
