@@ -158,6 +158,8 @@ void PrintP(Node* Ptr){
 
 void Set::print() const{
     PrintP(mRoot);
+    cout << endl;
+
 }
 
 size_t Set::remove(const std::string& value){
