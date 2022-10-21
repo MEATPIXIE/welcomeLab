@@ -153,19 +153,18 @@ const std::string& Set::lookup(size_t n) const{
 }
 
 void PrintP(Node* Ptr){
-    if(Ptr == NULL){
-        cout << "-";
-    }
-    else if(Ptr->left == NULL && Ptr->right == NULL){
-        cout << Ptr->data;
-    }
-    else{
-        cout << "(";
-        PrintP(Ptr->left);
-        cout << " " << Ptr->data << " ";
-        PrintP(Ptr->right);
-        cout << ")";
-    }
+    //if(mRoot != NULL){
+        if(Ptr->left != NULL){
+            PrintP(Ptr->left);
+        }
+        cout << Ptr->data << " ";
+        if(Ptr->right != NULL){
+            PrintP(Ptr->right);
+        }
+    //}
+    //else{
+    //    cout << "The tree is empty " << endl;
+    //}
     return;
 }
 
@@ -199,4 +198,3 @@ size_t Set::remove(const std::string& value){
     return yours;
     */
 }
-
