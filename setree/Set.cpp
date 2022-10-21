@@ -164,13 +164,14 @@ void PrintP(Node* Ptr){
         PrintP(Ptr->left);
         cout << " " << Ptr->data << " ";
         PrintP(Ptr->right);
-        cout << ")" << endl;
+        cout << ")";
     }
     return;
 }
 
 void Set::print() const{
     PrintP(mRoot);
+    cout << endl;
 }
 
 size_t Set::remove(const std::string& value){
