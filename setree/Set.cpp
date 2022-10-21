@@ -48,9 +48,23 @@ Set::~Set(){
     */
 }
 
-size_t Set::clear(){
-    return 0;
+
+size_t Set::clear() {
+    size_t numValues = 1;
+    if (mRoot == nullptr) {
+        return 0;
+    }
+    if (mRoot->left != nullptr) {
+        numValues += clear();
+    }
+    if (mRoot->right != nullptr) {
+        numValues += clear();
+    }
+    delete mRoot;
+    mRoot = nullptr;
+    return numValues;
 }
+
 bool Set::contains(const std::string& value) const{
     Node *node = mRoot;
     while (node != nullptr){
@@ -81,7 +95,6 @@ void Set::debug(){
 }
 
 size_t Set::insert(const std::string& value){
-    
 	Node* newNode = new Node;
 	newNode->data = value;
 	newNode->left = nullptr;
@@ -138,21 +151,24 @@ const std::string& Set::lookup(size_t n) const{
     */
 }
 
-void Set::print() const{
-    return;
-    /*
-    Node* current = this->head;
-    string theirs = "[";
-    while(current != NULL){
-        theirs += current->data;
-        if(current->next){
-            theirs+=", ";
+void PrintP(Node* Ptr){
+    //if(mRoot != NULL){
+        if(Ptr->left != NULL){
+            PrintP(Ptr->left);
         }
-        current = current->next;
-    }
-    theirs += "]";
-    cout << theirs << endl;
-    */
+        cout << Ptr->data << " ";
+        if(Ptr->right != NULL){
+            PrintP(Ptr->right);
+        }
+    //}
+    //else{
+    //    cout << "The tree is empty " << endl;
+    //}
+    return;
+}
+
+void Set::print() const{
+    PrintP(mRoot);
 }
 
 size_t Set::remove(const std::string& value){
