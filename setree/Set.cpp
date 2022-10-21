@@ -164,7 +164,7 @@ void PrintP(Node* Ptr){
         PrintP(Ptr->left);
         cout << " " << Ptr->data << " ";
         PrintP(Ptr->right);
-        cout << ")";
+        cout << ")" << endl;
     }
     return;
 }
