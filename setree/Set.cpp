@@ -47,12 +47,6 @@ size_t Set::clear() {
     if (mRoot == nullptr) {
         return 0;
     }
-    if (mRoot->left != nullptr) {
-        num += count();
-    }
-    if (mRoot->right != nullptr) {
-        num += count();
-    }
     delete mRoot;
     mRoot = nullptr;
     return num;
