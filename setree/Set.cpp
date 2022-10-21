@@ -1,7 +1,3 @@
-#include "Set.h"
-#include <iostream>
-using namespace std;
-
 Set::Set(){
     mRoot = NULL;
 }
@@ -39,32 +35,25 @@ Set::Set(Set&& other){
 
 Set::~Set(){
     delete mRoot;
-    /*
-    while (current != NULL){
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
-    mRoot = NULL;
-    */
 }
 
 
 size_t Set::clear() {
-    size_t numValues = 1;
+    size_t num = count();
     if (mRoot == nullptr) {
         return 0;
     }
     if (mRoot->left != nullptr) {
-        numValues += clear();
+        num += count();
     }
     if (mRoot->right != nullptr) {
-        numValues += clear();
+        num += count();
     }
     delete mRoot;
     mRoot = nullptr;
-    return numValues;
+    return num;
 }
+
 
 bool Set::contains(const std::string& value) const{
     Node *node = mRoot;
@@ -171,7 +160,6 @@ void PrintP(Node* Ptr){
 
 void Set::print() const{
     PrintP(mRoot);
-    cout << endl;
 }
 
 size_t Set::remove(const std::string& value){
@@ -183,7 +171,7 @@ size_t Set::remove(const std::string& value){
     while (current) {
         if (current->data == value) {
             yours++;
-            if (current == head) {
+            if (curcrent == head) {
                 head = current->next;
                 delete current;
                 current = head;
