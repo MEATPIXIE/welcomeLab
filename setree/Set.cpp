@@ -188,6 +188,7 @@ void Set::print() const{
 
 size_t Set::remove(const std::string& value){
     return 1;
+    cout << endl;
     /*
     size_t yours = 0;
     Node* current = head;
