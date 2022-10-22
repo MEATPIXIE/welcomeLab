@@ -49,21 +49,14 @@ Set::~Set(){
     */
 }
 
-
 size_t Set::clear() {
-    size_t numValues = 1;
+    size_t num = count();
     if (mRoot == nullptr) {
         return 0;
     }
-    if (mRoot->left != nullptr) {
-        numValues += clear();
-    }
-    if (mRoot->right != nullptr) {
-        numValues += clear();
-    }
     delete mRoot;
     mRoot = nullptr;
-    return numValues;
+    return num;
 }
 
 bool Set::contains(const std::string& value) const{
