@@ -7,10 +7,10 @@ Set::Set(){
 }
 
 Node* copyer(const Node* mRoot){
-    Node* copy = new Node();
     if(mRoot == NULL){
         return NULL;
     }
+    Node* copy = new Node();
     copy->left = copyer(mRoot->left);
     copy->data = mRoot->data;
     copy->right = copyer(mRoot->right);
