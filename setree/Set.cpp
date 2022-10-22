@@ -6,30 +6,19 @@ Set::Set(){
     mRoot = NULL;
 }
 
-Set::Set(const Set& other){
-    mRoot = other.mRoot;
-    /*
-    Node* temp = other.mRoot;
-    Node* current = NULL;
-    if (other.mRoot == NULL){
-        mRoot = NULL;
-    }else{
-
-        mRoot = new Node;
-        mRoot->data = temp->data;
-        mRoot->next = NULL;
-        current = mRoot;
-        temp = temp->next;
-
-        while(temp != NULL){
-            current->next = new Node;
-            current = current->next;
-            current->data = temp->data;
-            current->next = NULL;
-            temp = temp->next;
-        }
+Node* copyer(const Node* mRoot){
+    Node* copy = new Node();
+    if(mRoot == NULL){
+        return NULL;
     }
-    */
+    copy->left = copyer(mRoot->left);
+    copy->data = mRoot->data;
+    copy->right = copyer(mRoot->right);
+    return copy;
+}
+
+Set::Set(const Set& other){
+    mRoot = copyer(other.mRoot);
 }
 
 Set::Set(Set&& other){
@@ -187,8 +176,7 @@ void Set::print() const{
 }
 
 size_t Set::remove(const std::string& value){
-    return 1;
-    cout << endl;
+    return 0;
     /*
     size_t yours = 0;
     Node* current = head;
