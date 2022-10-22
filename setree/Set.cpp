@@ -143,6 +143,15 @@ Node* Reaf(Node* node){
     return Reaf(node->right);
 }
 
+void organize(Node* mBranch, Node* list[], size_t index){
+    if(mBranch == NULL){
+        return;
+    }
+    organize(mBranch->left, list, index++);
+    list[index] = mBranch;
+    organize(mBranch->right, list, index++);
+}
+
 const std::string& Set::lookup(size_t n) const{
     Node* look[this->count()];
     if(n >= this->count()){
@@ -154,6 +163,8 @@ const std::string& Set::lookup(size_t n) const{
     else if(n==this->count() - 1){
         return Reaf(mRoot) -> data;
     }
+    size_t num = 0;
+    organize(mRoot, look, num);
     return look[n]->data;
 }
 
