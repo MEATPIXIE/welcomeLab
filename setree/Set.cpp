@@ -160,6 +160,9 @@ const std::string& Set::lookup(size_t n) const{
     if(n == 0){
         return Leaf(mRoot) -> data;
     }
+    else if(n == 1){
+        return mRoot->left->data;
+    }
     else if(n==this->count() - 1){
         return Reaf(mRoot) -> data;
     }
