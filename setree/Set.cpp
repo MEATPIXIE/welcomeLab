@@ -39,19 +39,32 @@ Set::Set(Set&& other){
 
 Set::~Set(){
     delete mRoot;
+    /*
+    while (current != NULL){
+        Node* next = current->next;
+        delete current;
+        current = next;
+    }
+    mRoot = NULL;
+    */
 }
 
 
 size_t Set::clear() {
-    size_t num = count();
+    size_t numValues = 1;
     if (mRoot == nullptr) {
         return 0;
     }
+    if (mRoot->left != nullptr) {
+        numValues += clear();
+    }
+    if (mRoot->right != nullptr) {
+        numValues += clear();
+    }
     delete mRoot;
     mRoot = nullptr;
-    return num;
+    return numValues;
 }
-
 
 bool Set::contains(const std::string& value) const{
     Node *node = mRoot;
@@ -116,27 +129,32 @@ size_t Set::insert(const std::string& value){
 	return 0;
 }
 
+Node* Leaf(Node* node){
+    if(node->left == NULL){
+        return node;
+    }
+    return Leaf(node->left);
+}
+
+Node* Reaf(Node* node){
+    if(node->right == NULL){
+        return node;
+    }
+    return Reaf(node->right);
+}
+
 const std::string& Set::lookup(size_t n) const{
-    return NULL;
-    /*
-    Node* temp = new Node;
-    temp->data = value;
-    temp->next = NULL;
-    Node* current = head;
-    if(head == NULL){
-        head = temp;
+    Node* look[this->count()];
+    if(n >= this->count()){
+        throw out_of_range("Out of range");
     }
-    if (head->data >= temp->data){
-        head = temp;
-        head->next = current;
-        return;
+    if(n == 0){
+        return Leaf(mRoot) -> data;
     }
-    while(current->next != NULL && current->next->data < temp->data){
-        current = current->next;
+    else if(n==this->count() - 1){
+        return Reaf(mRoot) -> data;
     }
-    temp->next = current->next;
-    current->next = temp;
-    */
+    return look[n]->data;
 }
 
 void PrintP(Node* Ptr){
@@ -159,7 +177,6 @@ void PrintP(Node* Ptr){
 void Set::print() const{
     PrintP(mRoot);
     cout << endl;
-
 }
 
 size_t Set::remove(const std::string& value){
@@ -171,7 +188,7 @@ size_t Set::remove(const std::string& value){
     while (current) {
         if (current->data == value) {
             yours++;
-            if (curcrent == head) {
+            if (current == head) {
                 head = current->next;
                 delete current;
                 current = head;
