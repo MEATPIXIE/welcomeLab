@@ -28,14 +28,6 @@ Set::Set(Set&& other){
 
 Set::~Set(){
     delete mRoot;
-    /*
-    while (current != NULL){
-        Node* next = current->next;
-        delete current;
-        current = next;
-    }
-    mRoot = NULL;
-    */
 }
 
 size_t Set::clear() {
@@ -111,18 +103,19 @@ size_t Set::insert(const std::string& value){
 	return 0;
 }
 
-Node* Leaf(Node* node){
+Node* mineaf(Node* node){
     if(node->left == NULL){
         return node;
     }
-    return Leaf(node->left);
+    return mineaf(node->left);
 }
 
 Node* Reaf(Node* node){
-    if(node->right == NULL){
-        return node;
+    Node* curr = node;
+    while(curr->right != NULL){
+        curr = curr->right;
     }
-    return Reaf(node->right);
+    return curr;
 }
 
 void organize(Node* mBranch, Node* list[], size_t index){
@@ -140,7 +133,7 @@ const std::string& Set::lookup(size_t n) const{
         throw out_of_range("Out of range");
     }
     if(n == 0){
-        return Leaf(mRoot) -> data;
+        return mineaf(mRoot) -> data;
     }
     else if(n == 1){
         return mRoot->left->data;
@@ -202,7 +195,7 @@ struct Node* Delete(Node*& root, string data){
         }
         
         else{
-            struct Node* temp = Leaf(root->right);
+            Node* temp = Reaf(root->left);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
         }
@@ -210,7 +203,6 @@ struct Node* Delete(Node*& root, string data){
     }
     return root;
 }
-
 size_t Set::remove(const std::string& value){
     if (contains(value) == false){
         return 0;
