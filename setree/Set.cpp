@@ -202,7 +202,7 @@ struct Node* Delete(Node*& root, string data){
         }
         
         else{
-            struct Node* temp = mineaf(root->right);
+            struct Node* temp = Leaf(root->right);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
         }
