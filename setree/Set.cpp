@@ -175,29 +175,47 @@ void Set::print() const{
     cout << endl;
 }
 
-size_t Set::remove(const std::string& value){
-    return 0;
-    /*
-    size_t yours = 0;
-    Node* current = head;
-    Node* prev = NULL;
-    while (current) {
-        if (current->data == value) {
-            yours++;
-            if (current == head) {
-                head = current->next;
-                delete current;
-                current = head;
-                continue;
-            }
-            prev->next = current->next;
-            delete current;
-            current = prev->next;
-        } else {
-            prev = current;
-            current = current->next;
-        }
+struct Node* Delete(Node*& root, string data){
+    if(root == NULL){
+        return root;
     }
-    return yours;
-    */
+    else if(data < root->data){
+        root->left = Delete(root->left, data);
+    }
+    else if(data > root->data){
+        root->right = Delete(root->right, data);
+    }
+    else{
+        if(root->left == NULL && root->right == NULL){
+            delete root;
+            root = NULL;
+        }
+        else if(root->left == NULL){
+            struct Node *temp = root;
+            root = root->right;
+            delete temp;
+        }
+        else if (root->right == NULL){
+            struct Node *temp = root;
+            root = root->left;
+            delete temp;
+        }
+        
+        else{
+            struct Node* temp = mineaf(root->right);
+            root->data = temp->data;
+            root->right = Delete(root->right, temp->data);
+        }
+        
+    }
+    return root;
 }
+
+size_t Set::remove(const std::string& value){
+    if (contains(value) == false){
+        return 0;
+    }
+    Delete(mRoot, value);
+    return 1;
+}
+
