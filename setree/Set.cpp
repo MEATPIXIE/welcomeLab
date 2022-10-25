@@ -28,7 +28,6 @@ Set::Set(Set&& other){
 
 Set::~Set(){
     delete mRoot;
-    mRoot = nullptr;
 }
 
 size_t Set::clear() {
@@ -123,12 +122,11 @@ void organize(Node* mBranch, Node* list[], size_t index){
     if(mBranch == NULL){
         return;
     }
-    //list[index] = mBranch;
     organize(mBranch->left, list, index++);
     list[index] = mBranch;
     organize(mBranch->right, list, index++);
-    //list[index] = mBranch;
 }
+
 const std::string& Set::lookup(size_t n) const{
     Node* look[this->count()];
     if(n >= this->count()){
@@ -164,6 +162,7 @@ void PrintP(Node* Ptr){
     }
     return;
 }
+
 void Set::print() const{
     PrintP(mRoot);
     cout << endl;
@@ -188,13 +187,11 @@ struct Node* Delete(Node*& root, string data){
             struct Node *temp = root;
             root = root->right;
             delete temp;
-            temp = NULL;
         }
         else if (root->right == NULL){
             struct Node *temp = root;
             root = root->left;
             delete temp;
-            temp = NULL;
         }
         
         else{
