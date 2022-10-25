@@ -201,6 +201,8 @@ struct Node* Delete(Node*& root, string data){
             Node* temp = Reaf(root->left);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
+	    delete temp;
+	    temp = NULL;
         }
         
     }
@@ -211,6 +213,5 @@ size_t Set::remove(const std::string& value){
         return 0;
     }
     Delete(mRoot, value);
-    mRoot = NULL;
     return 1;
 }
