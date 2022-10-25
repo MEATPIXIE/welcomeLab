@@ -196,11 +196,13 @@ struct Node* Delete(Node*& root, string data){
             struct Node *temp = root;
             root = root->right;
             delete temp;
+            temp = NULL;
         }
         else if (root->right == NULL){
             struct Node *temp = root;
             root = root->left;
             delete temp;
+            temp = NULL
         }
         
         else{
