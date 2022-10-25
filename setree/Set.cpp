@@ -38,6 +38,7 @@ void Clear(Node* node){
         Clear(node->left);
         Clear(node->right);
         delete node;
+	node = NULL;
         return;
     }
 }
