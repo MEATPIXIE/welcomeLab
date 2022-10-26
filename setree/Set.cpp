@@ -139,7 +139,7 @@ int organize(Node* mBranch, string* vector, int index){
 
 string str;
 const std::string& Set::lookup(size_t n) const{
-    int size = count();
+    size_t size = count();
     string vec[size];
     organize(mRoot, vec, 0);
     if (n >= size){
