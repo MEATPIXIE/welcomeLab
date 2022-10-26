@@ -31,21 +31,13 @@ Set::~Set(){
     mRoot = nullptr;
 }
 
-void Clear(Node* node){
-    if(node == NULL){
-        return;
-    }else{
-        Clear(node->left);
-        Clear(node->right);
-        delete node;
-        return;
-    }
-}
-
 size_t Set::clear() {
-    size_t num = this->count();
-    Clear(mRoot);
-    mRoot = NULL;
+    size_t num = count();
+    if (mRoot == nullptr) {
+        return 0;
+    }
+    delete mRoot;
+    mRoot = nullptr;
     return num;
 }
 
