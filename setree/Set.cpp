@@ -28,16 +28,24 @@ Set::Set(Set&& other){
 
 Set::~Set(){
     delete mRoot;
-    mRoot = NULL;
+    mRoot = nullptr;
+}
+
+void Clear(Node* node){
+    if(node == NULL){
+        return;
+    }else{
+        Clear(node->left);
+        Clear(node->right);
+        delete node;
+        return;
+    }
 }
 
 size_t Set::clear() {
-    size_t num = count();
-    if (mRoot == nullptr) {
-        return 0;
-    }
-    delete mRoot;
-    mRoot = nullptr;
+    size_t num = this->count();
+    Clear(mRoot);
+    mRoot = NULL;
     return num;
 }
 
@@ -119,32 +127,26 @@ Node* Reaf(Node* node){
     return curr;
 }
 
-void organize(Node* mBranch, Node* list[], size_t index){
+int organize(Node* mBranch, string* vector, int index){
     if(mBranch == NULL){
-        return;
+        return index;
     }
-    organize(mBranch->left, list, index++);
-    list[index] = mBranch;
-    organize(mBranch->right, list, index++);
+    index = organize(mBranch->left, vector, index);
+    vector[index] = mBranch->data;
+    index = organize(mBranch->right, vector, index + 1);
+    return index;
 }
 
+string str;
 const std::string& Set::lookup(size_t n) const{
-    Node* look[this->count()];
-    if(n >= this->count()){
-        throw out_of_range("Out of range");
+    int size = count();
+    string vec[size];
+    organize(mRoot, vec, 0);
+    if (n >= size){
+        throw out_of_range("out of range");
     }
-    if(n == 0){
-        return mineaf(mRoot) -> data;
-    }
-    else if(n == 1){
-        return mRoot->left->data;
-    }
-    else if(n==this->count() - 1){
-        return Reaf(mRoot) -> data;
-    }
-    size_t num = 0;
-    organize(mRoot, look, num);
-    return look[n]->data;
+    str = vec[n];
+    return str;
 }
 
 void PrintP(Node* Ptr){
@@ -163,7 +165,6 @@ void PrintP(Node* Ptr){
     }
     return;
 }
-
 void Set::print() const{
     PrintP(mRoot);
     cout << endl;
@@ -187,10 +188,12 @@ struct Node* Delete(Node*& root, string data){
         else if(root->left == NULL){
             struct Node *temp = root;
             root = root->right;
+            delete temp;
         }
         else if (root->right == NULL){
             struct Node *temp = root;
             root = root->left;
+            delete temp;
         }
         
         else{
@@ -198,8 +201,7 @@ struct Node* Delete(Node*& root, string data){
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
         }
-        delete temp;
-	temp = NULL;
+        
     }
     return root;
 }
