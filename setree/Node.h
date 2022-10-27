@@ -10,7 +10,10 @@ struct Node {
 };
 
 Node::~Node(){
-    cleanup(data);
+    delete->left;
+    delete->right;
+    left = NULL;
+    right = NULL;
 }
 
 
