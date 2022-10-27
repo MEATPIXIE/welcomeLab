@@ -72,37 +72,37 @@ void Set::debug(){
 }
 
 size_t Set::insert(const std::string& value){
-	Node* newNode = new Node;
-	newNode->data = value;
-	newNode->left = nullptr;
-	newNode->right = nullptr;
-	if (mRoot == nullptr){
-		mRoot = newNode;
+    Node* newNode = new Node;
+    newNode->data = value;
+    newNode->left = nullptr;
+    newNode->right = nullptr;
+    if (mRoot == nullptr){
+	mRoot = newNode;
+	return 1;
+    }
+    Node* curr = mRoot;
+    while (curr != nullptr){
+	if (value < curr->data){
+	    if (curr->left == nullptr){
+	        curr->left = newNode;
 		return 1;
+	    }else{
+		curr = curr->left;
+	    }
 	}
-	Node* curr = mRoot;
-	while (curr != nullptr){
-		if (value < curr->data){
-			if (curr->left == nullptr){
-				curr->left = newNode;
-				return 1;
-			}else{
-				curr = curr->left;
-			}
-		}
-		else if (value > curr->data){
-			if (curr->right == nullptr){
-				curr->right = newNode;
-				return 1;
-			}else{
-				curr = curr->right;
-			}
-		}
-		else{
-			return 0;
-		}
+	else if (value > curr->data){
+	    if (curr->right == nullptr){
+                curr->right = newNode;
+		return 1;
+	    }else{
+		curr = curr->right;
+	    }
 	}
-	return 0;
+	else{
+	    return 0;
+	}
+    }
+    return 0;
 }
 
 Node* mineaf(Node* root){
