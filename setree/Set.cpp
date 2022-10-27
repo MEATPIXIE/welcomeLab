@@ -28,16 +28,17 @@ Set::Set(Set&& other){
 }
 
 Set::~Set(){
-    delete mRoot;
-    mRoot = nullptr;
+    this->clear();
 }
 
-
 void cleanup(Node* node){
-	if(node != nullptr){
+	if(!node){
+		return;
+	}else{
 		cleanup(node->left);
 		cleanup(node->right);
 		delete node;
+		return;
 	}
 }
 
