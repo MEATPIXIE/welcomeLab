@@ -12,6 +12,8 @@ struct Node {
 Node::~Node(){
     delete left;
     delete right;
+    left = NULL;
+    right = NULL;
 }
 
 
