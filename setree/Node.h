@@ -6,16 +6,17 @@ struct Node {
     std::string data;
     Node*       left;
     Node*       right;
-    ~Node();
+    //~Node();
 };
 
+/*
 Node::~Node(){
     delete left;
     delete right;
     left = NULL;
     right = NULL;
 }
-
+*/
 
 #endif
 
