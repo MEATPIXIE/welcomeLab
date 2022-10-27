@@ -105,6 +105,7 @@ size_t Set::insert(const std::string& value){
 	return 0;
 }
 
+
 Node* mineaf(Node* node){
     if(node->left == NULL){
         return node;
@@ -190,7 +191,7 @@ struct Node* Delete(Node*& root, string data){
         }
         
         else{
-            struct Node* temp = Reaf(root->left);
+            struct Node *temp = mineaf(root->right);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
             delete temp;
