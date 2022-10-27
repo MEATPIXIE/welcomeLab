@@ -99,11 +99,12 @@ size_t Set::insert(const std::string& value){
 	    }
 	}
 	else{
+	    delete newNode;
 	    return 0;
 	}
     }
-    return 0;
     delete newNode;
+    return 0;
 }
 
 Node* mineaf(Node* root){
