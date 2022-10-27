@@ -32,14 +32,16 @@ Set::~Set(){
     mRoot = nullptr;
 }
 
-size_t Set::clear() {
-    size_t num = count();
-    if (mRoot == nullptr) {
-        return 0;
-    }
-    delete mRoot;
-    mRoot = nullptr;
-    return num;
+void cleanup(Node* node){
+	if(node != NULL){
+		cleanup(node->left);
+		cleanup(node->right);
+		delete node;
+	}
+}
+
+size_t Set::clear(){
+    return cleanup(mRoot);
 }
 
 bool Set::contains(const std::string& value) const{
