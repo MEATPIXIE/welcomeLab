@@ -105,7 +105,12 @@ size_t Set::insert(const std::string& value){
 	return 0;
 }
 
-
+Node* mineaf(Node* root){
+    while(root->left != NULL){ 
+	root = root->left;
+    }
+    return root;
+}
 
 Node* Reaf(Node* node){
     Node* curr = node;
@@ -158,38 +163,35 @@ void Set::print() const{
     cout << endl;
 }
 
-Node* FindMin(Node* root)
-{
-	while(root->left != NULL) root = root->left;
-	return root;
-}
 
 struct Node* Delete(struct Node*& root, string data) {
-	if(root == NULL) return root; 
-	else if(data < root->data) root->left = Delete(root->left,data);
-	else if (data > root->data) root->right = Delete(root->right,data);
-	else {
-		if(root->left == NULL && root->right == NULL) { 
-			delete root;
-			root = NULL;
-		}
-		else if(root->left == NULL) {
-			struct Node *temp = root;
-			root = root->right;
-			delete temp;
-		}
-		else if(root->right == NULL) {
-			struct Node *temp = root;
-			root = root->left;
-			delete temp;
-		}
-		else { 
-			struct Node *temp = FindMin(root->right);
-			root->data = temp->data;
-			root->right = Delete(root->right,temp->data);
-		}
+    if(root == NULL){ 
+	return root; 
+    }
+    else if(data < root->data){ 
+	root->left = Delete(root->left,data);
+    }
+    else if (data > root->data){ 
+	root->right = Delete(root->right,data);
+    }else{
+	if(root->left == NULL && root->right == NULL) { 
+	    delete root;
+	    root = NULL;
+	}else if(root->left == NULL) {
+	    struct Node *temp = root;
+	    root = root->right;
+	    delete temp;
+	}else if(root->right == NULL) {
+	    struct Node *temp = root;
+	    root = root->left;
+	    delete temp;
+	}else{ 
+	    struct Node *temp = mineaf(root->right);
+	    root->data = temp->data;
+	    root->right = Delete(root->right,temp->data);
 	}
-	return root;
+    }
+    return root;
 }
 
 
