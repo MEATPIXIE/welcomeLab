@@ -106,11 +106,12 @@ size_t Set::insert(const std::string& value){
 }
 
 
-Node* mineaf(Node* node){
-    if(node->left == NULL){
-        return node;
-    }
-    return mineaf(node->left);
+Node* mineaf(Node* node)
+{
+	while(node->left != NULL){
+		node = node->left;
+	}
+	return node;
 }
 
 Node* Reaf(Node* node){
