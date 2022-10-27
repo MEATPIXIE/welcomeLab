@@ -195,6 +195,7 @@ struct Node* Delete(Node*& root, string data){
             root->right = Delete(root->right, temp->data);
             //delete temp;
         }
+	delete temp;
     }
     return root;
 }
