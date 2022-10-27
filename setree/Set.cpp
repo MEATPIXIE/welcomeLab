@@ -15,6 +15,7 @@ Node* copyer(const Node* mRoot){
     copy->data = mRoot->data;
     copy->right = copyer(mRoot->right);
     return copy;
+    //delete copy;
 }
 
 Set::Set(const Set& other){
@@ -192,11 +193,12 @@ struct Node* Delete(Node*& root, string data){
             Node* temp = Reaf(root->left);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
+            delete temp;
         }
-        
     }
     return root;
 }
+
 size_t Set::remove(const std::string& value){
     if (contains(value) == false){
         return 0;
