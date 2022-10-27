@@ -7,19 +7,16 @@ class Node{
     int key;
     Node* left;
     Node* right;
-}
-
+};
 class Number: public AST{
     double data;
 public:
     std::string prefix() const;
     std::string postfix() const = 0;
     double value() const;
-}
-
+};
 class Add: public AST{
 
-}
-
+};
 
 #endif
