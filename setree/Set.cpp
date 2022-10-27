@@ -174,23 +174,24 @@ struct Node* Delete(Node*& root, string data){
         root->right = Delete(root->right, data);
     }
     else{
+	struct Node *temp = root;
         if(root->left == NULL && root->right == NULL){
             delete root;
             root = NULL;
         }
         else if(root->left == NULL){
-            struct Node *temp = root;
+            temp = root;
             root = root->right;
             //delete temp;
         }
         else if (root->right == NULL){
-            struct Node *temp = root;
+            temp = root;
             root = root->left;
             //delete temp;
         }
         
         else{
-            Node* temp = Reaf(root->left);
+            temp = Reaf(root->left);
             root->data = temp->data;
             root->right = Delete(root->right, temp->data);
             //delete temp;
