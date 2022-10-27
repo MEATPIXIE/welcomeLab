@@ -12,10 +12,10 @@ double Number::value() const{
     return data;
 }
 std::string prefix() {
-    cout << "DWDE";
+    //cout << "DWDE";
     return NULL;
 }
 std::string postfix() {
-    cout << "ddee";
+    //cout << "ddee";
     return NULL;
 }
