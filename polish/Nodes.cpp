@@ -75,10 +75,10 @@ double Div::value() const{
     return (left->value() / right->value());
 }
 std::string Div::prefix() const{
-    return left->prefix() + " " / right->prefix() + " /";
+    return left->prefix() + " " + right->prefix() + " /";
 }
 std::string Div::postfix() const{
-    return left->postfix() + " " / right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " /";
 }
 
 
@@ -89,13 +89,13 @@ Rem::~Rem(){
     delete right;
 }
 double Rem::value() const{
-    return (left->value() % right->value());
+    return (left->value() + right->value());
 }
 std::string Rem::prefix() const{
-    return left->prefix() + " " % right->prefix() + " /";
+    return left->prefix() + " " + right->prefix() + " /";
 }
 std::string Rem::postfix() const{
-    return left->postfix() + " " % right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " /";
 }
 
 
