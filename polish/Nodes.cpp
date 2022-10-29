@@ -41,10 +41,10 @@ double Sub::value() const{
     return (left->value() - right->value());
 }
 std::string Sub::prefix() const{
-    return left->prefix() + " " - right->prefix() + " /";
+    return left->prefix() + " " + right->prefix() + " /";
 }
 std::string Sub::postfix() const{
-    return left->postfix() + " " - right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " /";
 }
 
 
@@ -58,10 +58,10 @@ double Mul::value() const{
     return (left->value() * right->value());
 }
 std::string Mul::prefix() const{
-    return left->prefix() + " " * right->prefix() + " /";
+    return left->prefix() + " " + right->prefix() + " /";
 }
 std::string Mul::postfix() const{
-    return left->postfix() + " " * right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " /";
 }
 
 
@@ -109,8 +109,8 @@ double Neg::value() const{
     return (left->value() * -1);
 }
 std::string Neg::prefix() const{
-    return left->prefix() + " " * -1 + " /";
+    return left->prefix() + " " + " /";
 }
 std::string Neg::postfix() const{
-    return left->postfix() + " " * -1 + " /";
+    return left->postfix() + " " + " /";
 }
