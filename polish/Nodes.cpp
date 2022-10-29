@@ -1,12 +1,5 @@
 //Nodes.cpp
-
 #include "Nodes.h"
-// Implement your AST subclasses' member functions here.
-// To format a double for output:
-//   std::ostringstream stream;
-//   stream << value;
-//   return stream.str();
-
 
 double Number::value() const{
     return data;
@@ -18,4 +11,22 @@ std::string prefix() {
 std::string postfix() {
     //cout << "ddee";
     return NULL;
+}
+
+
+
+Add:Add(AST*, AST*){
+}
+Add::~Add(){
+    delete left;
+    delete right;
+}
+double Add::value() const{
+    return (left->value() + right->value());
+}
+std::string Add::prefix() const{
+    return left->prefix() + " " + right->prefix() + " /";
+}
+std::string Add::postfix() const{
+    return left->postfix() + " " + right->postfix() + " /";
 }
