@@ -1,6 +1,5 @@
 #ifndef NODES_H
 #define NODES_H
-
 #include "AST.h"
 
 class Node{
@@ -15,8 +14,23 @@ public:
     std::string postfix() const = 0;
     double value() const;
 };
-class Add: public AST{
 
+
+
+class Add: public AST{
+    public:
+        AST* left;
+        AST* right;
+        Add(AST*, AST*);
+        ~Add();
+        std::string prefix() const;
+        std::string postfix() const = 0;
+        double value() const;
 };
+
+
+
+
+
 
 #endif
