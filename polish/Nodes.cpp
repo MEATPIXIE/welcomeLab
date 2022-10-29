@@ -15,7 +15,7 @@ std::string postfix() {
 
 
 
-Add:Add(AST*, AST*){
+Add::Add(AST*, AST*){
 }
 Add::~Add(){
     delete left;
