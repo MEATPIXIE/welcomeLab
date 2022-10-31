@@ -3,41 +3,47 @@
 #include <iostream>
 using namespace std;
 
-Stack::Stack(int size){
-    topp = -1;
-    capacity = size;
-    vec = new int[size];
-}
-Stack::~Stack() {
-    delete[] vec;
-}
-void Stack::push(int x){
-    if (topp == capacity - 1){
-        cout << "Overflow";
-        return;
-    }
-    vec[++topp] = x;
-}
-int Stack::pop(){
-    if(topp == 0){
-        cout << "Underflow";
-    }
-    return vec[topp--];
-}
-int Stack::top(){
-    if(topp > 0){
-        return vec[topp];
-    }
-    return 0;
+Stack::Stack(){
+    topp = NULL;
 }
 
-/*
-int main(){
-    Stack a(SIZE);
-    a.push(1);
-    a.pop();
-    a.pop();
-    
-    return 0;
+Stack::~Stack() {
+    Node* next;
+    while(topp != NULL){
+        next = topp->next;
+        delete topp;
+        topp = next;
+    }
 }
-*/
+
+void Stack::push(AST* token){
+    Node* n = new Node;
+    if(topp == NULL){
+        n->data = token;
+        n->next = NULL;
+        topp = n;
+    }else{
+        n->data = token;
+        n->next = topp;
+        topp = n;
+    }
+}
+
+AST* Stack::pop(){
+    AST* node = topp->data;
+    if(topp == NULL){
+        return NULL;
+    }else{
+        Node* temp;
+        temp = topp;
+        topp = topp->next;
+        delete temp;
+        temp = NULL;
+    }
+    return node;
+}
+
+AST* Stack::top(){
+    AST* node = topp->data;
+    return node;
+}
