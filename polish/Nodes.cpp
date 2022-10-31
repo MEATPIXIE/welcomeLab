@@ -1,116 +1,128 @@
 //Nodes.cpp
 #include "Nodes.h"
 
+#include <sstream>
+
+Number::Number(){
+}
+
+std::string Number::prefix() const{
+    std::ostringstream mystream;
+    mystream << this->data;
+    return mystream.str();
+}
+
+std::string Number::postfix() const{
+    std::ostringstream mystream;
+    mystream << this->data;
+    return mystream.str();
+}
+
 double Number::value() const{
-    return data;
-}
-std::string prefix() {
-    //cout << "DWDE";
-    return NULL;
-}
-std::string postfix() {
-    //cout << "ddee";
-    return NULL;
+    return this->data;
 }
 
 
-Add::Add(AST*, AST*){
+Add::Add(){
 }
 Add::~Add(){
     delete left;
     delete right;
 }
 double Add::value() const{
-    return (left->value() + right->value());
+    return this->left->value() + this->right->value();
 }
 std::string Add::prefix() const{
-    return left->prefix() + " " + right->prefix() + " /";
+    return "+ " + left->prefix() + " " + right->prefix();
 }
 std::string Add::postfix() const{
-    return left->postfix() + " " + right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " +";
 }
 
 
-Sub::Sub(AST*, AST*){
+Sub::Sub(){
 }
 Sub::~Sub(){
     delete left;
     delete right;
 }
 double Sub::value() const{
-    return (left->value() - right->value());
+    return this->left->value() - this->right->value();
 }
 std::string Sub::prefix() const{
-    return left->prefix() + " " + right->prefix() + " /";
+    return "- " + left->prefix() + " " + right->prefix();
 }
 std::string Sub::postfix() const{
-    return left->postfix() + " " + right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " -";
 }
 
 
-Mul::Mul(AST*, AST*){
+Mul::Mul(){
 }
 Mul::~Mul(){
     delete left;
     delete right;
 }
 double Mul::value() const{
-    return (left->value() * right->value());
+    return this->left->value() * this->right->value();
 }
 std::string Mul::prefix() const{
-    return left->prefix() + " " + right->prefix() + " /";
+    return "* " + left->prefix() + " " + right->prefix();
 }
 std::string Mul::postfix() const{
-    return left->postfix() + " " + right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " *";
 }
 
 
-Div::Div(AST*, AST*){
+
+
+Div::Div(){
 }
 Div::~Div(){
     delete left;
     delete right;
 }
 double Div::value() const{
-    return (left->value() / right->value());
+    return this->left->value() / this->right->value();
 }
 std::string Div::prefix() const{
-    return left->prefix() + " " + right->prefix() + " /";
+    return "/ " + left->prefix() + " " + right->prefix();
 }
 std::string Div::postfix() const{
     return left->postfix() + " " + right->postfix() + " /";
 }
 
 
-Rem::Rem(AST*, AST*){
+Rem::Rem(){
 }
 Rem::~Rem(){
     delete left;
     delete right;
 }
 double Rem::value() const{
-    return (left->value() + right->value());
+    return 0;//this->left->value() % this->right->value();
 }
 std::string Rem::prefix() const{
-    return left->prefix() + " " + right->prefix() + " /";
+    return "% " + left->prefix() + " " + right->prefix();
 }
 std::string Rem::postfix() const{
-    return left->postfix() + " " + right->postfix() + " /";
+    return left->postfix() + " " + right->postfix() + " %";
 }
 
 
-Neg::Neg(AST*, AST*){
+Neg::Neg(){
 }
 Neg::~Neg(){
     delete left;
     //delete right;
 }
 double Neg::value() const{
-    return (left->value() * -1);
+    return this->left->value() * -1;
 }
 std::string Neg::prefix() const{
-    return left->prefix() + " " + " /";
+    return "~ " + left->prefix();
 }
 std::string Neg::postfix() const{
-    return left->postfix() + " " + " /";
+    return left->postfix() + " ~";
 }
+
