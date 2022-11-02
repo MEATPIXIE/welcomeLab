@@ -13,16 +13,15 @@
 
 class GenePool {
   // Member Variables
-
+  //map named pool
+  static map<Person*, Person> pool;
   // Helper Functions
 
 public:
   // Build a database of people from a TSV file.
   GenePool(std::istream& stream);
-
   // Clean it up.
   ~GenePool();
-
   // Find a person in the database by name.
   // Return nullptr if there is no such person.
   Person* find(const std::string& name) const;
