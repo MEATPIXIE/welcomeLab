@@ -1,6 +1,6 @@
 #include "GenePool.h"
 
-static map<Person*, Person> pool;
+//static map<Person*, Person> pool;
 
 GenePool::GenePool(std::istream& stream){
 }
