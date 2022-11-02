@@ -14,7 +14,7 @@
 class GenePool {
   // Member Variables
   //map named pool
-  static map<Person*, Person> pool;
+  //static map<Person*, Person> pool;
   // Helper Functions
 
 public:
