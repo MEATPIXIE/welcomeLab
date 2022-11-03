@@ -11,7 +11,7 @@ GenePool::GenePool(std::istream& stream){
     }
 }
 GenePool::~GenePool(){
-    for(std::map<string, Person*>::iterator itr = pool.begin(); itr != pool.end(); itr++){
+    for(std::map<std::string, Person*>::iterator itr = pool.begin(); itr != pool.end(); itr++){
         delete itr->second;
     }
 }
