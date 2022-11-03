@@ -13,11 +13,11 @@
 
 class GenePool {
   // Member Variables
-  string geneName;
+  std::string geneName;
   Person* geneMom;
   Person* geneDad;
   Gender geneGender = Gender::ANY;
-  std::map<string, Person*> pool;
+  std::map<std::string, Person*> pool;
   // Helper Functions
 
 public:
