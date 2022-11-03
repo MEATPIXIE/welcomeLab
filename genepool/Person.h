@@ -16,8 +16,8 @@ class Person {
   Gender myGender;
   Person* myMom;
   Person* myDad;
-public:
   std::set<Person*> myKids;
+public:
   Person(std::string name, std::string gender, Person* mother, Person* father);
   // Destructor?
 
@@ -48,7 +48,6 @@ public:
   std::set<Person*> sisters(PMod pmod = PMod::ANY, SMod smod = SMod::ANY);
   std::set<Person*> sons();
   std::set<Person*> uncles(PMod pmod = PMod::ANY, SMod smod = SMod::ANY);
-
   // Other Member Functions
 };
 
