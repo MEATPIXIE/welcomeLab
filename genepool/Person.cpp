@@ -1,4 +1,6 @@
 #include "Person.h"
+//#include "GenePool.h"
+
 
 Person::Person(std::string name, std::string gender, Person* mother, Person* father){
     myName = name;
@@ -39,6 +41,7 @@ std::set<Person*> brothers(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
 std::set<Person*> children(){
     std::set<Person*> empty = {};
     return empty;
+    //return this->myKids;
 }
 std::set<Person*> cousins(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
     std::set<Person*> empty = {};
@@ -46,6 +49,13 @@ std::set<Person*> cousins(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
 }
 std::set<Person*> daughters(){
     std::set<Person*> empty = {};
+    /*
+    for(int i = 0; i < myKids.size(); i++){
+        if(myKids[i].gender() == Gender::FEMALE){
+            empty.insert(itr);
+        }
+    }
+    */
     return empty;
 }
 std::set<Person*> descendants(){
@@ -98,6 +108,15 @@ std::set<Person*> sisters(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
 }
 std::set<Person*> sons(){
     std::set<Person*> empty = {};
+    /*
+    for(auto itr = pool.begin(); itr != pool.end(); itr++){
+        for(int i = 0; i < myKids.size(); i++){
+            if(myKids[i].gender() == Gender::MALE){
+                empty.insert(itr);
+            }
+        }
+    }
+    */
     return empty;
 }
 std::set<Person*> uncles(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
