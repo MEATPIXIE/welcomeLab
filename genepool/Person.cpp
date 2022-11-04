@@ -1,5 +1,4 @@
 #include "Person.h"
-//#include "GenePool.h"
 
 
 Person::Person(std::string name, std::string gender, Person* mother, Person* father){
@@ -26,6 +25,7 @@ Person* Person::father(){
 }
 
 
+
 std::set<Person*> ancestors(PMod pmod = PMod::ANY){
     std::set<Person*> empty = {};
     return empty;
@@ -38,25 +38,23 @@ std::set<Person*> brothers(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
     std::set<Person*> empty = {};
     return empty;
 }
-std::set<Person*> children(){
-    std::set<Person*> empty = {};
-    return empty;
-    //return this->myKids;
+
+std::set<Person*> Person::children() {
+    return this->myKids;
 }
 std::set<Person*> cousins(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
     std::set<Person*> empty = {};
     return empty;
 }
-std::set<Person*> daughters(){
-    std::set<Person*> empty = {};
-    /*
-    for(int i = 0; i < myKids.size(); i++){
-        if(myKids[i].gender() == Gender::FEMALE){
-            empty.insert(itr);
+std::set<Person*> Person::daughters(){
+    std::set<Person*> daughter = {};
+    std::set<Person*> child = children();
+    for(auto itr = child.begin(); itr != child.end(); itr++){
+        if ((*itr)->gender() == Gender::FEMALE){
+                daughter.insert(*itr);
         }
     }
-    */
-    return empty;
+    return daughter;
 }
 std::set<Person*> descendants(){
     std::set<Person*> empty = {};
@@ -106,18 +104,15 @@ std::set<Person*> sisters(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
     std::set<Person*> empty = {};
     return empty;
 }
-std::set<Person*> sons(){
-    std::set<Person*> empty = {};
-    /*
-    for(auto itr = pool.begin(); itr != pool.end(); itr++){
-        for(int i = 0; i < myKids.size(); i++){
-            if(myKids[i].gender() == Gender::MALE){
-                empty.insert(itr);
-            }
+std::set<Person*> Person::sons(){
+    std::set<Person*> son = {};
+    std::set<Person*> child = children();
+    for(auto itr = child.begin(); itr != child.end(); itr++){
+        if ((*itr)->gender() == Gender::MALE){
+                son.insert(*itr);
         }
     }
-    */
-    return empty;
+    return son;
 }
 std::set<Person*> uncles(PMod pmod = PMod::ANY, SMod smod = SMod::ANY){
     std::set<Person*> empty = {};
