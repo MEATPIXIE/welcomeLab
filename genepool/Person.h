@@ -5,6 +5,7 @@
 
 #include <set>
 #include <string>
+#include <map>
 
 // This is the Person class you need to implement.
 // It has many member functions that perform relationship queries.
