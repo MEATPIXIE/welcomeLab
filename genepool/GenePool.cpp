@@ -4,14 +4,12 @@
 using namespace std;
 
 GenePool::GenePool(std::istream& stream){
-    
     std::string line;
     std::string nombre;
     std::string genero;
     std::string mamaSeLlama;
     std::string papaSeLlama;
-    
-    //Gender gender;
+    Gender gender;
     Person* mama;
     Person* papa;
 
@@ -43,9 +41,9 @@ GenePool::GenePool(std::istream& stream){
             papa = find(papaSeLlama);
         }
         
-        Person* person = new Person(nombre, genero, mama, papa);
+        Person* person = new Person(nombre, gender, mama, papa);
         pool.insert({nombre, person});
-        
+
     }
 }
 GenePool::~GenePool(){
