@@ -122,7 +122,7 @@ std::set<Person*> Person::parents(PMod pmod){
 
 std::set<Person*> Person::siblings(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
-    return empty;0
+    return empty;
 }
 std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
