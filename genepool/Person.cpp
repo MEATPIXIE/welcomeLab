@@ -8,11 +8,13 @@ Person::Person(std::string name, Gender gender, Person* mother, Person* father){
     myMom = mother;
     myDad = father;
     
+    /*
     if(myMom != NULL){
         myMom->myKids.insert({this});
     }else if(myDad != NULL){
         myDad->myKids.insert({this});
     }
+    */
     
 }
 
@@ -120,7 +122,7 @@ std::set<Person*> Person::parents(PMod pmod){
 
 std::set<Person*> Person::siblings(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
-    return empty;
+    return empty;0
 }
 std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
