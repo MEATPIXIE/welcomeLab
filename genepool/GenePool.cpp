@@ -11,7 +11,7 @@ GenePool::GenePool(std::istream& stream){
     std::string mamaSeLlama;
     std::string papaSeLlama;
     
-    Gender gender;
+    //Gender gender;
     Person* mama;
     Person* papa;
 
