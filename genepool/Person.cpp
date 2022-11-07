@@ -12,7 +12,6 @@ Person::Person(std::string name, Gender gender, Person* mother, Person* father){
         myDad->myKids.insert({this});
     }
 }
-
 const std::string& Person::name() const{
     return this->myName;
 }
@@ -66,18 +65,29 @@ std::set<Person*> Person::descendants(){
     return empty;
 }
 std::set<Person*> Person::grandchildren(){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> grandchild = {};
+    std::set<Person*> child = children();
+    for(auto itr = child.begin(); itr != child.end(); itr++){
+        grandchild.insert(*itr);
+    }
+    return grandchild;
 }
 std::set<Person*> Person::granddaughters(){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> granddaughter = {};
+    std::set<Person*> gChild = grandchildren();
+    for(auto itr = gChild.begin(); itr != gChild.end(); itr++){
+        if ((*itr)->gender() == Gender::FEMALE){
+            granddaughter.insert(*itr);
+        }
+    }
+    return granddaughter;
 }
+
 
 std::set<Person*> Person::grandfathers(PMod pmod){
     std::set<Person*> grandfather = {};
-    std::set<Person*> parent = parents();
-    for(auto itr = parent.begin(); itr != parent.end(); itr++){
+    std::set<Person*> gParent = parents();
+    for(auto itr = gParent.begin(); itr != gParent.end(); itr++){
         if ((*itr)->gender() == Gender::MALE){
                 grandfather.insert(*itr);
         }
@@ -86,15 +96,14 @@ std::set<Person*> Person::grandfathers(PMod pmod){
 }
 std::set<Person*> Person::grandmothers(PMod pmod){
     std::set<Person*> grandmother = {};
-    std::set<Person*> parent = parents();
-    for(auto itr = parent.begin(); itr != parent.end(); itr++){
+    std::set<Person*> gParent = grandparents();
+    for(auto itr = gParent.begin(); itr != gParent.end(); itr++){
         if ((*itr)->gender() == Gender::FEMALE){
                 grandmother.insert(*itr);
         }
     }
     return grandmother;
 }
-
 std::set<Person*> Person::grandparents(PMod pmod){
     std::set<Person*> grandparent = {};
     std::set<Person*> parent = parents();
@@ -103,9 +112,18 @@ std::set<Person*> Person::grandparents(PMod pmod){
     }
     return grandparent;
 }
+
+
+
 std::set<Person*> Person::grandsons(){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> grandson = {};
+    std::set<Person*> gChild = grandchildren();
+    for(auto itr = gChild.begin(); itr != gChild.end(); itr++){
+        if ((*itr)->gender() == Gender::MALE){
+            grandson.insert(*itr);
+        }
+    }
+    return grandson;
 }
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
