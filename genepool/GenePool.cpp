@@ -1,3 +1,6 @@
+#include <iostream>
+using namespace std;
+
 
 #include "GenePool.h"
 #include <sstream>
@@ -44,6 +47,11 @@ GenePool::GenePool(std::istream& stream){
         Person* person = new Person(nombre, gender, mama, papa);
         pool.insert({nombre, person});
 
+        if(mama != NULL){
+            mama->children().insert({person});
+        }else if(papa != NULL){
+            papa->children().insert({person});
+        }
     }
 }
 GenePool::~GenePool(){
