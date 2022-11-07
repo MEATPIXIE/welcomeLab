@@ -15,7 +15,7 @@ GenePool::GenePool(std::istream& stream){
 
     while(getline(stream, line)){
         istringstream leer(line);
-        if(line[0] == '#' || line.empty()){
+        if(line.at(0) == '#' || line.empty()){
             continue;
         }else{
             getline(leer, nombre, '\t');
