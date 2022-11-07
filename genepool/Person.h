@@ -19,7 +19,7 @@ class Person {
   Person* myDad;
   std::set<Person*> myKids;
 public:
-  Person(std::string name, std::string gender, Person* mother, Person* father);
+  Person(std::string name, Gender gender, Person* mother, Person* father);
   // Destructor?
 
   // Required Getter Functions
