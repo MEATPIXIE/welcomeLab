@@ -7,7 +7,8 @@ Person::Person(std::string name, Gender gender, Person* mother, Person* father){
     myDad = father;
     if(myMom != NULL){
         myMom->myKids.insert({this});
-    }else if(myDad != NULL){
+    }
+    if(myDad != NULL){
         myDad->myKids.insert({this});
     }
 }
