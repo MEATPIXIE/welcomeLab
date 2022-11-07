@@ -1,16 +1,22 @@
 #include "Person.h"
 
 
-Person::Person(std::string name, std::string gender, Person* mother, Person* father){
+Person::Person(std::string name, Gender gender, Person* mother, Person* father){
     myName = name;
+
+    /*
     if(gender == "male"){
         myGender = Gender::MALE;
     }else if(gender == "female"){
         myGender = Gender::FEMALE;
     }
+    */
+    
+    myGender = gender;
     myMom = mother;
     myDad = father;
 }
+
 const std::string& Person::name() const{
     return this->myName;
 }
