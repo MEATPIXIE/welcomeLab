@@ -284,7 +284,7 @@ std::set<Person*> Person::cousins(PMod pmod, SMod smod){
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
     std::set<Person*> nephew = {};
     for(Person* pair:siblings(pmod)){
-        nephew.merge(pair->sons(PMod::ANY, smod));
+        nephew.merge(pair->sons());
         //uncle.insert(pair);
     }
     return nephew;
@@ -292,7 +292,7 @@ std::set<Person*> Person::nephews(PMod pmod, SMod smod){
 std::set<Person*> Person::nieces(PMod pmod, SMod smod){
     std::set<Person*> niece = {};
     for(Person* pair:siblings(pmod)){
-        niece.merge(pair->daughters(PMod::ANY, smod));
+        niece.merge(pair->daughters());
         //uncle.insert(pair);
     }
     return niece;
