@@ -66,6 +66,16 @@ std::set<Person*> Person::ancestors(PMod pmod){
     }
     return empty;
 }
+std::set<Person*> Person::descendants(){
+    std::set<Person*> desk = {};
+    for(Person* myKid: children()){
+        desk.insert(myKid);
+        for(Person* des: myKid->descendants()){
+            desk.insert(des);
+        }
+    }
+    return desk;
+}
 std::set<Person*> Person::children() {
     return myKids;
 }
@@ -155,8 +165,8 @@ std::set<Person*> Person::grandchildren(){
     std::set<Person*> grandchild = {};
     auto child = children();
     for(auto itr = child.begin(); itr != child.end(); itr++){
-        grandchild.merge((*itr)->children());
-        //grandchild.insert(*itr);
+        //grandchild.merge((*itr)->children());
+        grandchild.insert(*itr);
     }
     return grandchild;
 }
@@ -187,26 +197,26 @@ std::set<Person*> Person::aunts(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
 }
+
+
+
 std::set<Person*> Person::brothers(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> empty = siblings(pmod, smod);
+    std::set<Person*> brother = {};
+    for(auto itr = empty.begin(); itr != empty.end(); itr++){
+        if ((*itr)->gender() == Gender::MALE){
+            brother.insert(*itr);
+        }
+    }
+    return brother;
 }
+
+
+
 std::set<Person*> Person::cousins(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
 }
-
-std::set<Person*> Person::descendants(){
-    std::set<Person*> desk = {};
-    for(Person* myKid: children()){
-        desk.insert(myKid);
-        for(Person* des: myKid->descendants()){
-            desk.insert(des);
-        }
-    }
-    return desk;
-}
-
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
@@ -215,14 +225,62 @@ std::set<Person*> Person::nieces(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
 }
+
+
+
 std::set<Person*> Person::siblings(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> empty = {}; 
+    std::set<Person*> sibling = {}; 
+    for (Person* pair: parents(pmod)){
+        empty.merge(pair->children());
+        //empty.insert(pair);
+    }
+    for (Person* kid:empty){
+        if (kid -> name() != this->name()){
+            switch(smod){
+                case SMod::FULL:
+                if(((kid->myDad != NULL) && (kid->myMom != NULL)) && ((this->myDad != NULL) && (this->myMom != NULL))){
+                    if((kid->myDad->name() == this->myDad->name()) && (kid->myMom->name() == this->myMom->name())){
+                        sibling.insert(kid);
+                    }
+                }
+                break;
+                case SMod::HALF:
+                if(kid->myMom != NULL){
+                    if((kid->myMom->name() == this->myMom->name()) && (kid->myDad == NULL || kid->myDad->name() != this->myDad->name())){
+                        sibling.insert(kid);
+                    }
+                }
+                if(kid->myDad != NULL){
+                    if((kid->myDad->name() == this->myDad->name()) && (kid->myMom == NULL || kid->myMom->name() != this->myMom->name())){
+                        sibling.insert(kid);
+                    }
+                }
+                break;
+                
+                default:
+                sibling.insert(kid);
+                break;
+            }
+        }
+    }
+    return sibling;
 }
+
+
+
 std::set<Person*> Person::sisters(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> empty = siblings(pmod, smod);
+    std::set<Person*> sister = {};
+    for(auto itr = empty.begin(); itr != empty.end(); itr++){
+        if ((*itr)->gender() == Gender::FEMALE){
+            sister.insert(*itr);
+        }
+    }
+    return sister;
 }
+
+
 std::set<Person*> Person::uncles(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
