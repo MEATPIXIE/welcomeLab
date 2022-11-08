@@ -1,4 +1,6 @@
 #include "Person.h"
+using namespace std;
+
 
 Person::Person(std::string name, Gender gender, Person* mother, Person* father){
     myName = name;
@@ -114,10 +116,49 @@ std::set<Person*> Person::grandparents(PMod pmod){
 
 // done ^
 
+
+
+
+
 std::set<Person*> Person::ancestors(PMod pmod){
     std::set<Person*> empty = {};
+    if(pmod == PMod::MATERNAL){
+        if(myMom != NULL){
+            empty.insert(myMom);
+            auto mancs = myMom->ancestors();
+            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }else if(pmod == PMod::PATERNAL){
+        if(myDad != NULL){
+            empty.insert(myDad);
+            auto pancs = myDad->ancestors();
+            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }else{
+        if(myMom != NULL){
+            empty.insert(myMom);
+            auto mancs = myMom->ancestors();
+            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }if(myDad != NULL){
+            empty.insert(myDad);
+            auto pancs = myDad->ancestors();
+            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }
     return empty;
 }
+
+
+
+
 std::set<Person*> Person::aunts(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
@@ -139,23 +180,16 @@ std::set<Person*> Person::descendants(){
 
 std::set<Person*> Person::grandchildren(){
     std::set<Person*> grandchild = {};
-    
-    std::set<Person*> child = children();
+    auto child = children();
     for(auto itr = child.begin(); itr != child.end(); itr++){
+        //grandchild.merge((*itr)->children());
         grandchild.insert(*itr);
     }
-
-    /*
-    if(myKids->children()){
-        grandchild.insert(myKids->children());
-    }
-    */
-    
     return grandchild;
 }
 std::set<Person*> Person::granddaughters(){
     std::set<Person*> granddaughter = {};
-    std::set<Person*> gChild = grandchildren();
+    auto gChild = grandchildren();
     for(auto itr = gChild.begin(); itr != gChild.end(); itr++){
         if ((*itr)->gender() == Gender::FEMALE){
             granddaughter.insert(*itr);
@@ -165,7 +199,7 @@ std::set<Person*> Person::granddaughters(){
 }
 std::set<Person*> Person::grandsons(){
     std::set<Person*> grandson = {};
-    std::set<Person*> gChild = grandchildren();
+    auto gChild = grandchildren();
     for(auto itr = gChild.begin(); itr != gChild.end(); itr++){
         if ((*itr)->gender() == Gender::MALE){
             grandson.insert(*itr);
