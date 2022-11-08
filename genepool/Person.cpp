@@ -29,8 +29,6 @@ Person* Person::father(){
 
 
 
-
-
 std::set<Person*> Person::ancestors(PMod pmod){
     std::set<Person*> empty = {};
     if(pmod == PMod::MATERNAL){
@@ -191,44 +189,6 @@ std::set<Person*> Person::grandsons(){
     }
     return grandson;
 }
-
-// done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
-
-std::set<Person*> Person::aunts(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-
-
-
-std::set<Person*> Person::brothers(PMod pmod, SMod smod){
-    std::set<Person*> empty = siblings(pmod, smod);
-    std::set<Person*> brother = {};
-    for(auto itr = empty.begin(); itr != empty.end(); itr++){
-        if ((*itr)->gender() == Gender::MALE){
-            brother.insert(*itr);
-        }
-    }
-    return brother;
-}
-
-
-
-std::set<Person*> Person::cousins(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::nephews(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::nieces(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-
-
-
 std::set<Person*> Person::siblings(PMod pmod, SMod smod){
     std::set<Person*> empty = {}; 
     std::set<Person*> sibling = {}; 
@@ -267,9 +227,16 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod){
     }
     return sibling;
 }
-
-
-
+std::set<Person*> Person::brothers(PMod pmod, SMod smod){
+    std::set<Person*> empty = siblings(pmod, smod);
+    std::set<Person*> brother = {};
+    for(auto itr = empty.begin(); itr != empty.end(); itr++){
+        if ((*itr)->gender() == Gender::MALE){
+            brother.insert(*itr);
+        }
+    }
+    return brother;
+}
 std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     std::set<Person*> empty = siblings(pmod, smod);
     std::set<Person*> sister = {};
@@ -281,7 +248,39 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     return sister;
 }
 
+// done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
 
+std::set<Person*> Person::aunts(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
+
+
+
+std::set<Person*> Person::cousins(PMod pmod, SMod smod){
+    std::set<Person*> cousin = {};
+    std::set<Person*> empty = {};
+    for(Person* pair:parents(pmod)){
+        empty.merge(pair->siblings(PMod::ANY, smod));
+        //empty.insert(pair);
+    }
+    for(auto itr = empty.begin(); itr != empty.end(); itr++){
+        cousin.merge((*itr)->children());
+        //cousin.insert(*tr);
+    }
+    return cousin;
+}
+
+
+
+std::set<Person*> Person::nephews(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
+std::set<Person*> Person::nieces(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
 std::set<Person*> Person::uncles(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
     return empty;
