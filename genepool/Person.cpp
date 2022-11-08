@@ -151,34 +151,6 @@ std::set<Person*> Person::grandparents(PMod pmod){
     return grandparent;
 }
 
-// done ^
-
-
-
-
-
-
-
-
-std::set<Person*> Person::aunts(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::brothers(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::cousins(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::descendants(){
-    std::set<Person*> empty = {};
-    return empty;
-}
-
-
-
 std::set<Person*> Person::grandchildren(){
     std::set<Person*> grandchild = {};
     auto child = children();
@@ -209,7 +181,31 @@ std::set<Person*> Person::grandsons(){
     return grandson;
 }
 
+// done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
 
+std::set<Person*> Person::aunts(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
+std::set<Person*> Person::brothers(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
+std::set<Person*> Person::cousins(PMod pmod, SMod smod){
+    std::set<Person*> empty = {};
+    return empty;
+}
+
+std::set<Person*> Person::descendants(){
+    std::set<Person*> desk = {};
+    for(Person* myKid: children()){
+        desk.insert(myKid);
+        for(Person* des: myKid->descendants()){
+            desk.insert(des);
+        }
+    }
+    return desk;
+}
 
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
