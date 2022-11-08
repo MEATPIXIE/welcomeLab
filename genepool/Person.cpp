@@ -115,6 +115,7 @@ std::set<Person*> Person::parents(PMod pmod){
     }
     return parents;
 }
+
 std::set<Person*> Person::grandfathers(PMod pmod){
     std::set<Person*> grandfather = {};
     if((pmod == PMod::MATERNAL || pmod == PMod::ANY) && myMom){
@@ -165,8 +166,8 @@ std::set<Person*> Person::grandchildren(){
     std::set<Person*> grandchild = {};
     auto child = children();
     for(auto itr = child.begin(); itr != child.end(); itr++){
-        //grandchild.merge((*itr)->children());
-        grandchild.insert(*itr);
+        grandchild.merge((*itr)->children());
+        //grandchild.insert(*itr);
     }
     return grandchild;
 }
