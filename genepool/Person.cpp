@@ -248,15 +248,6 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     return sister;
 }
 
-// done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
-
-std::set<Person*> Person::aunts(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-
-
-
 std::set<Person*> Person::cousins(PMod pmod, SMod smod){
     std::set<Person*> cousin = {};
     std::set<Person*> empty = {};
@@ -266,16 +257,26 @@ std::set<Person*> Person::cousins(PMod pmod, SMod smod){
     }
     for(auto itr = empty.begin(); itr != empty.end(); itr++){
         cousin.merge((*itr)->children());
-        //cousin.insert(*tr);
+        //cousin.insert(*itr);
     }
     return cousin;
 }
 
+// done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
 
-
+std::set<Person*> Person::aunts(PMod pmod, SMod smod){
+    std::set<Person*> aunt = {};
+    //std::set<Person*> empty = {};
+    for(Person* pair:parents(pmod)){
+        aunt.merge(pair->sisters(PMod::ANY, smod));
+        //aunt.insert(pair);
+    }
+    return aunt;
+}
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> empty = siblings(pmod, smod);
+    std::set<Person*> nephew = {};
+    return nephew;
 }
 std::set<Person*> Person::nieces(PMod pmod, SMod smod){
     std::set<Person*> empty = {};
