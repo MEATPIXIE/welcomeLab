@@ -283,6 +283,11 @@ std::set<Person*> Person::nieces(PMod pmod, SMod smod){
     return empty;
 }
 std::set<Person*> Person::uncles(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
+    std::set<Person*> uncle = {};
+    //std::set<Person*> empty = {};
+    for(Person* pair:parents(pmod)){
+        uncle.merge(pair->brothers(PMod::ANY, smod));
+        //uncle.insert(pair);
+    }
+    return uncle;
 }
