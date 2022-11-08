@@ -247,7 +247,24 @@ std::set<Person*> Person::sisters(PMod pmod, SMod smod){
     }
     return sister;
 }
-
+std::set<Person*> Person::aunts(PMod pmod, SMod smod){
+    std::set<Person*> aunt = {};
+    //std::set<Person*> empty = {};
+    for(Person* pair:parents(pmod)){
+        aunt.merge(pair->sisters(PMod::ANY, smod));
+        //aunt.insert(pair);
+    }
+    return aunt;
+}
+std::set<Person*> Person::uncles(PMod pmod, SMod smod){
+    std::set<Person*> uncle = {};
+    //std::set<Person*> empty = {};
+    for(Person* pair:parents(pmod)){
+        uncle.merge(pair->brothers(PMod::ANY, smod));
+        //uncle.insert(pair);
+    }
+    return uncle;
+}
 std::set<Person*> Person::cousins(PMod pmod, SMod smod){
     std::set<Person*> cousin = {};
     std::set<Person*> empty = {};
@@ -264,30 +281,20 @@ std::set<Person*> Person::cousins(PMod pmod, SMod smod){
 
 // done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done ^ done
 
-std::set<Person*> Person::aunts(PMod pmod, SMod smod){
-    std::set<Person*> aunt = {};
-    //std::set<Person*> empty = {};
-    for(Person* pair:parents(pmod)){
-        aunt.merge(pair->sisters(PMod::ANY, smod));
-        //aunt.insert(pair);
-    }
-    return aunt;
-}
 std::set<Person*> Person::nephews(PMod pmod, SMod smod){
-    std::set<Person*> empty = siblings(pmod, smod);
     std::set<Person*> nephew = {};
+    for(Person* pair:siblings(pmod)){
+        nephew.merge(pair->sons(PMod::ANY, smod));
+        //uncle.insert(pair);
+    }
     return nephew;
 }
 std::set<Person*> Person::nieces(PMod pmod, SMod smod){
-    std::set<Person*> empty = {};
-    return empty;
-}
-std::set<Person*> Person::uncles(PMod pmod, SMod smod){
-    std::set<Person*> uncle = {};
-    //std::set<Person*> empty = {};
-    for(Person* pair:parents(pmod)){
-        uncle.merge(pair->brothers(PMod::ANY, smod));
+    std::set<Person*> niece = {};
+    for(Person* pair:siblings(pmod)){
+        niece.merge(pair->daughters(PMod::ANY, smod));
         //uncle.insert(pair);
     }
-    return uncle;
+    return niece;
 }
+
