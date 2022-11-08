@@ -29,6 +29,43 @@ Person* Person::father(){
 
 
 
+
+
+std::set<Person*> Person::ancestors(PMod pmod){
+    std::set<Person*> empty = {};
+    if(pmod == PMod::MATERNAL){
+        if(myMom != NULL){
+            empty.insert(myMom);
+            auto mancs = myMom->ancestors();
+            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }else if(pmod == PMod::PATERNAL){
+        if(myDad != NULL){
+            empty.insert(myDad);
+            auto pancs = myDad->ancestors();
+            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }else{
+        if(myMom != NULL){
+            empty.insert(myMom);
+            auto mancs = myMom->ancestors();
+            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }if(myDad != NULL){
+            empty.insert(myDad);
+            auto pancs = myDad->ancestors();
+            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
+                empty.insert(*itr);
+            }
+        }
+    }
+    return empty;
+}
 std::set<Person*> Person::children() {
     return myKids;
 }
@@ -120,42 +157,6 @@ std::set<Person*> Person::grandparents(PMod pmod){
 
 
 
-std::set<Person*> Person::ancestors(PMod pmod){
-    std::set<Person*> empty = {};
-    if(pmod == PMod::MATERNAL){
-        if(myMom != NULL){
-            empty.insert(myMom);
-            auto mancs = myMom->ancestors();
-            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
-                empty.insert(*itr);
-            }
-        }
-    }else if(pmod == PMod::PATERNAL){
-        if(myDad != NULL){
-            empty.insert(myDad);
-            auto pancs = myDad->ancestors();
-            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
-                empty.insert(*itr);
-            }
-        }
-    }else{
-        if(myMom != NULL){
-            empty.insert(myMom);
-            auto mancs = myMom->ancestors();
-            for(auto itr = mancs.begin(); itr != mancs.end(); itr++){
-                empty.insert(*itr);
-            }
-        }if(myDad != NULL){
-            empty.insert(myDad);
-            auto pancs = myDad->ancestors();
-            for(auto itr = pancs.begin(); itr != pancs.end(); itr++){
-                empty.insert(*itr);
-            }
-        }
-    }
-    return empty;
-}
-
 
 
 
@@ -182,8 +183,8 @@ std::set<Person*> Person::grandchildren(){
     std::set<Person*> grandchild = {};
     auto child = children();
     for(auto itr = child.begin(); itr != child.end(); itr++){
-        //grandchild.merge((*itr)->children());
-        grandchild.insert(*itr);
+        grandchild.merge((*itr)->children());
+        //grandchild.insert(*itr);
     }
     return grandchild;
 }
