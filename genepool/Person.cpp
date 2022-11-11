@@ -208,6 +208,7 @@ std::set<Person*> Person::siblings(PMod pmod, SMod smod){
                 break;
                 case SMod::HALF:
                 if(kid->myMom != NULL){
+                    cout << kid ->myMom;
                     if((kid->myMom->name() == this->myMom->name()) && (kid->myDad == NULL || kid->myDad->name() != this->myDad->name())){
                         sibling.insert(kid);
                     }
