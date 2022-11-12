@@ -4,6 +4,8 @@
 
 Heap::Heap(size_t capacity){
     mCapacity = capacity;
+    mCount = 0;
+    mData =  new Entry[capacity];
 }
 
 Heap::Heap(const Heap& other){
