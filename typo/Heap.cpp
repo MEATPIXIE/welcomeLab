@@ -12,6 +12,11 @@ Heap::Heap(const Heap& other){
 }
 
 Heap::Heap(Heap&& other){
+    this->mData = other.mData;
+    this->mCount = other.mCount;
+    this->mCapacity = other.mCapacity;
+    
+    other.mData = NULL;
 }
 
 Heap::~Heap(){
