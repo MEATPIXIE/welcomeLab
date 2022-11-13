@@ -40,7 +40,7 @@ size_t Heap::count() const{
   return mCount;
 }
 const Heap::Entry& Heap::lookup (size_t index) const{
-    if (index > mCapacity || index < 0){
+    if (index > mCapacity){ //|| index < 0){
         throw out_of_range ("OoR");
     }
     return mData[index];
