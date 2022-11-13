@@ -57,8 +57,8 @@ Heap::Entry Heap::pop(){
     
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
-
-    size_t ours = 0;    
+    size_t ours = 0;  
+    
     while(ours < (mCount - 1)){
         size_t first = 2 * ours + 2;
         size_t second = 2 * ours + 2;
@@ -90,7 +90,7 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     mData[0] = {value, score};
     size_t ours = 0;   
     
-    while(ours < (mCount - 1)){
+    while(ours < mCount){
         size_t first = 2 * ours + 2;
         size_t second = 2 * ours + 2;
         if (first >= mCount){
@@ -102,6 +102,21 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
                 mData[ours] = mData[first];
                 mData[first] = temp;
                 ours = first;
+            }else{
+                break;
+            }
+        }
+        else{
+            if (mData[ours].score > mData[first].score && mData[first].score <= mData[second].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[first];
+                mData[first] = temp;
+                ours = first;
+            }else if (mData[ours].score > mData[second].score && mData[second].score <= mData[first].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[second];
+                mData[second] = temp;
+                ours = second;
             }else{
                 break;
             }
@@ -119,7 +134,10 @@ void Heap::push(const std::string & value, float score){
         throw overflow_error("OE");
     }
     
-    size_t ours = 0;    
+    Entry var = mData[0];
+    mData[0] = {value, score};
+    size_t ours = 0; 
+    
     while(ours < (mCount - 1)){
         size_t first = 2 * ours + 2;
         size_t second = 2 * ours + 2;
