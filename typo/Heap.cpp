@@ -130,7 +130,7 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
 
 
 void Heap::push(const std::string & value, float score){
-    if (mCount > mCapacity){
+    if (count() > capacity()){
         throw overflow_error("OE");
     }
     
@@ -172,4 +172,3 @@ const Heap::Entry& Heap::top() const{
     
     return mData[0];
 }
-
