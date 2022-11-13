@@ -17,11 +17,11 @@ Heap::Heap(const Heap& other){
     if(other.mData == NULL){
         return;
     }
-    //else{
+    else{
         for(size_t i = 0; i < mCount; i++){
             mine[i] = other.mData[i];
         }
-    //}
+    }
     mData = mine;
 }
 
