@@ -50,27 +50,65 @@ const Heap::Entry& Heap::lookup (size_t index) const{
 
 
 Heap::Entry Heap::pop(){
+    
     if (mCount == 0){
         throw underflow_error("UE");
     }
     
     Entry var = mData[0];
-    var.value = "test";
-    var.score = 0.0;
+    mData[0] = mData[mCount - 1];
+
+    size_t ours = 0;    
+    while(ours < (mCount - 1)){
+        size_t first = 2 * ours + 2;
+        size_t second = 2 * ours + 2;
+        if (first >= mCount){
+            break;
+        }
+        if (second >= mCount){
+            if (mData[ours].score > mData[first].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[first];
+                mData[first] = temp;
+                ours = first;
+            }else{
+                break;
+            }
+        }
+    }
     
     return var;
 }
 
 Heap::Entry Heap::pushpop(const std::string & value, float score){
-    Entry x;
-    x.value = "mine";
-    x.score = 0.0;
     
     if (mCount == 0){
         throw underflow_error("UE");
     }
+
+    Entry var = mData[0];
+    mData[0] = {value, score};
+    size_t ours = 0;   
     
-    return x;
+    while(ours < (mCount - 1)){
+        size_t first = 2 * ours + 2;
+        size_t second = 2 * ours + 2;
+        if (first >= mCount){
+            break;
+        }
+        if (second >= mCount){
+            if (mData[ours].score > mData[first].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[first];
+                mData[first] = temp;
+                ours = first;
+            }else{
+                break;
+            }
+        }
+    }
+    
+    return var;
 }
 
 
@@ -81,24 +119,22 @@ void Heap::push(const std::string & value, float score){
         throw overflow_error("OE");
     }
     
-    size_t ours = 0;
-    mData[0] = {value, score};
-    
-    while(ours < mCount){
-        size_t left = 2 * ours + 2;
-        size_t right = 2 * ours + 2;
-        if (left >= mCount){
+    size_t ours = 0;    
+    while(ours < (mCount - 1)){
+        size_t first = 2 * ours + 2;
+        size_t second = 2 * ours + 2;
+        if (mData[ours].score > mData[first].score && mData[first].score <= mData[second].score){
+            Entry temp = mData[ours];
+            mData[ours] = mData[first];
+            mData[first] = temp;
+            ours = first;
+        }else if (mData[ours].score > mData[second].score && mData[second].score <= mData[first].score){
+            Entry temp = mData[ours];
+            mData[ours] = mData[second];
+            mData[second] = temp;
+            ours = second;
+        }else{
             break;
-        }
-        if (right >= mCount){
-            if (mData[ours].score > mData[left].score){
-                Entry temp = mData[ours];
-                mData[ours] = mData[left];
-                mData[left] = temp;
-                ours = left;
-            }else{
-                break;
-            }
         }
     }
 }
