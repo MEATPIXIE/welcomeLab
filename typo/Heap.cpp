@@ -39,10 +39,11 @@ size_t Heap::count() const{
   return mCount;
 }
 const Heap::Entry& Heap::lookup (size_t index) const{
-    if (index > mCapacity){ //|| index < 0){
+    if (index >= mCount || mCount == 0){
         throw out_of_range ("OoR");
+    }else{
+        return mData[index];
     }
-    return mData[index];
 }
 
 
@@ -159,7 +160,7 @@ void Heap::push(const std::string & value, float score){
 const Heap::Entry& Heap::top() const{
     if (mCount == 0){
         throw underflow_error("UE");
+    }else{
+        return mData[0];
     }
-    
-    return mData[0];
 }
