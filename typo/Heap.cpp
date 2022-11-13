@@ -80,6 +80,7 @@ Heap::Entry Heap::pop(){
     
     if (mCount == 0){
         throw underflow_error("UE");
+        return Entry();
     }
     
     Entry var = mData[0];
@@ -103,7 +104,6 @@ Heap::Entry Heap::pop(){
             }
         }
     }
-    
     return var;
 }
 
@@ -152,4 +152,3 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     
     return var;
 }
-
