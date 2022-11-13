@@ -9,25 +9,39 @@ Heap::Heap(size_t capacity){
 }
 
 Heap::Heap(const Heap& other){
+    this->mCapacity = other.mCapacity;
+    this->mCount = other.mCount;
+    this->mData = other.mData;
+    Entry* mine = new Entry[mCapacity];
+    
+    if(other.mData == NULL){
+        return;
+    }else{
+        for(size_t i = 0; i < mCount; i++){
+            mine[i] = other.mData[i];
+        }
+    }
+    mData = mine;
 }
 
 Heap::Heap(Heap&& other){
-    this->mData = other.mData;
-    this->mCount = other.mCount;
     this->mCapacity = other.mCapacity;
-    
+    this->mCount = other.mCount;
+    this->mData = other.mData;
+
     other.mData = NULL;
 }
 
 Heap::~Heap(){
+    delete[] mData;
 }
 
 size_t Heap::capacity() const{
-    return 0;
+    return mCapacity;
 }
 
 size_t Heap::count() const{
-    return 0;
+    return mCount;
 }
 
 const Heap::Entry& Heap::lookup(size_t index) const{
