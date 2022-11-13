@@ -131,20 +131,14 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
 
 void Heap::push(const std::string & value, float score){
     Entry var = {value, score};
-
     if (mCount > mCapacity){
         throw overflow_error("OE");
     }
-    
     size_t ours = mCount;
-    mCount++; 
-    
     mData[ours] = var;
-    
-    while(ours < (mData[(ours - 1)/2].score >mData[ours].score) && ours != 0){
-
+    mCount++; 
+    while(mData[(ours - 1)/2].score > mData[ours].score && ours != 0){
         Entry theirs = mData[ours];
-        
         mData[ours] = mData[(ours - 1)/2];
         mData[(ours - 1)/2] = theirs;
         ours = (ours - 1)/2;
