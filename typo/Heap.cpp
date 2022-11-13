@@ -86,7 +86,7 @@ Heap::Entry Heap::pop(){
     size_t ours = 0;  
     if (mCount == 0){
         throw underflow_error("UE");
-        //return Entry();
+        return Entry();
     }else{
         while(ours < (mCount)){
             size_t first = 2 * ours + 2;
