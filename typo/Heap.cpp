@@ -76,6 +76,8 @@ void Heap::push(const std::string & value, float score){
 
 
 
+
+
 Heap::Entry Heap::pop(){
     
     if (mCount == 0){
@@ -85,9 +87,10 @@ Heap::Entry Heap::pop(){
     
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
+    mCount--;
     size_t ours = 0;  
     
-    while(ours < (mCount - 1)){
+    while(ours < (mCount)){
         size_t first = 2 * ours + 2;
         size_t second = 2 * ours + 2;
         if (first >= mCount){
@@ -152,3 +155,4 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     
     return var;
 }
+
