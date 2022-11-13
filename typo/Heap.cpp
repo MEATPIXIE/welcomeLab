@@ -80,29 +80,30 @@ void Heap::push(const std::string & value, float score){
 
 Heap::Entry Heap::pop(){
     
+    if (mCount == 0){
+        throw underflow_error("UE");
+        //return Entry();
+    }
+    
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
     mCount--;
     size_t ours = 0;  
-    if (mCount == 0){
-        throw underflow_error("UE");
-        return Entry();
-    }else{
-        while(ours < (mCount)){
-            size_t first = 2 * ours + 2;
-            size_t second = 2 * ours + 2;
-            if (first >= mCount){
+    
+    while(ours < (mCount)){
+        size_t first = 2 * ours + 2;
+        size_t second = 2 * ours + 2;
+        if (first >= mCount){
+            break;
+        }
+        if (second >= mCount){
+            if (mData[ours].score > mData[first].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[first];
+                mData[first] = temp;
+                ours = first;
+            }else{
                 break;
-            }
-            if (second >= mCount){
-                if (mData[ours].score > mData[first].score){
-                    Entry temp = mData[ours];
-                    mData[ours] = mData[first];
-                    mData[first] = temp;
-                    ours = first;
-                }else{
-                    break;
-                }
             }
         }
     }
