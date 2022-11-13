@@ -54,7 +54,7 @@ const Heap::Entry& Heap::top() const{
 }
 void Heap::push(const std::string & value, float score){
     Entry var = {value, score};
-    if (count() > capacity()){
+    if (mCount > mCapacity){
         throw overflow_error("OE");
     }else{
         size_t ours = mCount;
