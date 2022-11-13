@@ -1,4 +1,4 @@
- 
+
 #include "Heap.h"
 #include <stdexcept>
 using namespace std;
@@ -54,7 +54,7 @@ const Heap::Entry& Heap::top() const{
 }
 void Heap::push(const std::string & value, float score){
     Entry var = {value, score};
-    if (mCount > mCapacity){
+    if (count() > capacity()){
         throw overflow_error("OE");
     }else{
         size_t ours = mCount;
