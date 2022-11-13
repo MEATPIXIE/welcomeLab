@@ -45,6 +45,32 @@ const Heap::Entry& Heap::lookup (size_t index) const{
         return mData[index];
     }
 }
+const Heap::Entry& Heap::top() const{
+    if (mCount == 0){
+        throw underflow_error("UE");
+    }else{
+        return mData[0];
+    }
+}
+void Heap::push(const std::string & value, float score){
+    Entry var = {value, score};
+    if (mCount > mCapacity){
+        throw overflow_error("OE");
+    }else{
+        size_t ours = mCount;
+        mData[ours] = var;
+        mCount++;
+        while(mData[(ours - 1)/2].score > mData[ours].score && ours != 0){
+            Entry theirs = mData[ours];
+            mData[ours] = mData[(ours - 1)/2];
+            mData[(ours - 1)/2] = theirs;
+            ours = (ours - 1)/2;
+        }
+    }
+}
+
+
+
 
 
 
@@ -127,40 +153,3 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     return var;
 }
 
-
-
-
-void Heap::push(const std::string & value, float score){
-    
-    Entry var = {value, score};
-    if (mCount > mCapacity){
-        throw overflow_error("OE");
-    }else{
-        size_t ours = mCount;
-        mData[ours] = var;
-        mCount++; 
-    
-        while(mData[(ours - 1)/2].score > mData[ours].score && ours != 0){
-            Entry theirs = mData[ours];
-            
-            mData[ours] = mData[(ours - 1)/2];
-            mData[(ours - 1)/2] = theirs;
-            ours = (ours - 1)/2;
-        }
-    }
-}
-
-
-
-
-
-
-
-
-const Heap::Entry& Heap::top() const{
-    if (mCount == 0){
-        throw underflow_error("UE");
-    }else{
-        return mData[0];
-    }
-}
