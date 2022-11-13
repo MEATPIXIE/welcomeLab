@@ -134,11 +134,12 @@ void Heap::push(const std::string & value, float score){
         throw overflow_error("OE");
     }
     
-    Entry var = mData[0];
-    mData[0] = {value, score};
-    size_t ours = 0; 
+    Entry var = {value, score};
+    size_t ours = mCount;
+    mData[ours] = var;
+    mCount++; 
     
-    while(ours < (mCount - 1)){
+    while(ours < (mData[(ours - 1)/2].score >mData[ours].score) && ours != 0){
         size_t first = 2 * ours + 2;
         size_t second = 2 * ours + 2;
         if (mData[ours].score > mData[first].score && mData[first].score <= mData[second].score){
@@ -171,3 +172,4 @@ const Heap::Entry& Heap::top() const{
     
     return mData[0];
 }
+
