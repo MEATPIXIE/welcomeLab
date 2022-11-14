@@ -79,7 +79,7 @@ void Heap::push(const std::string & value, float score){
 
 
 Heap::Entry Heap::pop(){
-    
+    /*
     Entry var = mData[0];
     
     if (mCount == 0){
@@ -108,6 +108,33 @@ Heap::Entry Heap::pop(){
         }
         return var;
     }
+    */
+    if (mCount == 0){
+        throw underflow_error("UE");
+    }
+
+    Entry var = mData[0];
+    //mData[0] = {value, score};
+    size_t ours = 0;   
+    
+    while(ours < mCount){
+        size_t first = ours * 2 + 1;
+        size_t second = ours * 2 + 2;
+        if (first >= mCount){
+            break;
+        }
+        if (second >= mCount){
+            if (mData[ours].score > mData[first].score){
+                Entry temp = mData[ours];
+                mData[ours] = mData[first];
+                mData[first] = temp;
+                ours = first;
+            }else{
+                break;
+            }
+        }
+    }
+    return var;
 }
 
 Heap::Entry Heap::pushpop(const std::string & value, float score){
