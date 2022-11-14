@@ -85,7 +85,7 @@ Heap::Entry Heap::pop(){
     if (mCount == 0){
         throw underflow_error("UE");
     }else{
-        mData[0] = mData[mCount];
+        mData[0] = mData[mCount - 1];
         mCount--;
         
         size_t ours = 0;  
