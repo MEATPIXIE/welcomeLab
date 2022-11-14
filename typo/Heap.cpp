@@ -111,6 +111,9 @@ Heap::Entry Heap::pop(){
     */
     if (mCount == 0){
         throw underflow_error("UE");
+    }else if(mCount == 1){
+        mCount--;
+        return mData[0];
     }
 
     Entry var = mData[0];
