@@ -56,7 +56,7 @@ void Heap::push(const std::string & value, float score){
     Entry var = {value, score};
     if (mCount > mCapacity){
         throw overflow_error("OE");
-    }else if(count() == capacity(){
+    }else if(count() == capacity()){
         throw overflow_error("OE");
     }else{
         size_t ours = mCount;
