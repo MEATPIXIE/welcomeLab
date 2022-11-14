@@ -90,8 +90,8 @@ Heap::Entry Heap::pop(){
         
         size_t ours = 0;  
         while(ours < mCount){
-            size_t first = 2 * ours + 1;
-            size_t second = 2 * ours + 2;
+            size_t first = ours * 2 + 1;
+            size_t second = ours * 2 + 2;
             if (first >= mCount){
                 break;
             }
@@ -121,8 +121,8 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     size_t ours = 0;   
     
     while(ours < mCount){
-        size_t first = 2 * ours + 2;
-        size_t second = 2 * ours + 2;
+        size_t first = ours * 2 + 1;
+        size_t second = ours * 2 + 2;
         if (first >= mCount){
             break;
         }
