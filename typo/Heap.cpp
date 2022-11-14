@@ -114,7 +114,8 @@ Heap::Entry Heap::pop(){
     }
 
     Entry var = mData[0];
-    //mData[0] = {value, score};
+    mData[0] = [mCount - 1];
+    mCount--;
     size_t ours = 0;   
     
     while(ours < mCount){
