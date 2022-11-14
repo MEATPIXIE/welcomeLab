@@ -114,7 +114,7 @@ Heap::Entry Heap::pop(){
     }
 
     Entry var = mData[0];
-    mData[0] = [mCount - 1];
+    mData[0] = mData[mCount - 1];
     mCount--;
     size_t ours = 0;   
     
