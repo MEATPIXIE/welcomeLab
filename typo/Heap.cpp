@@ -87,10 +87,10 @@ Heap::Entry Heap::pop(){
     }else{
         mData[0] = mData[mCount - 1];
         mCount--;
+        
         size_t ours = 0;  
-    
         while(ours < mCount){
-            size_t first = 2 * ours + 2;
+            size_t first = 2 * ours + 1;
             size_t second = 2 * ours + 2;
             if (first >= mCount){
                 break;
