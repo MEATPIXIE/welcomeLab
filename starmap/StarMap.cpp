@@ -2,18 +2,26 @@
 #include "StarMap.h"
 
 
-
 StarMap::StarMap(std::istream& stream){
+    int count = 1;
+    double x, y, z;
+
+    while(stream >> x >> y >> z){
+        Star aStar;
+        
+        aStar.x = x;
+        aStar.y = y;
+        aStar.z = z;
+        aStar.id = count;
+        myStars->push_back(aStar);
+        
+        count++;
+    }
 }
 
 StarMap::~StarMap(){
-    /*
-    for(std::map<std::string, Person*>::iterator itr = pool.begin(); itr != pool.end(); itr++){
-        delete itr->second;
-    }
-    */
+    delete myStars;
 }
-
 
 
 StarMap* StarMap::create(std::istream& stream) {
