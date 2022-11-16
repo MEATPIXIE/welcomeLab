@@ -1,4 +1,4 @@
-#ifndef STARMAP_H
+                                                                                                                                                                                                 #ifndef STARMAP_H
 #define STARMAP_H
 
 #include "Star.h"
@@ -12,7 +12,7 @@ public:
     static StarMap* create(std::istream& stream);
 
 private:
-    // Member Variables
+    std::vector<Star>* myStars;
 
 public:
     // Constructor & Destructor
@@ -21,6 +21,7 @@ public:
 
     // Required Member Function
     std::vector<Star> find(size_t n, float x, float y, float z);
+    
 
     // Other Member Functions
 };
