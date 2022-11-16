@@ -4,14 +4,14 @@
 
 StarMap::StarMap(std::istream& stream){
     int count = 1;
-    double x, y, z;
+    std::string x, y, z;
 
     while(stream >> x >> y >> z){
         Star aStar;
         
-        aStar.x = x;
-        aStar.y = y;
-        aStar.z = z;
+        aStar.x = std::stof(x);
+        aStar.y = std::stof(y);
+        aStar.z = std::stof(z);
         aStar.id = count;
         myStars->push_back(aStar);
         
