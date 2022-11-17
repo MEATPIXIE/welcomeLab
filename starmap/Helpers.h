@@ -4,12 +4,15 @@
 
 #include <cstddef>
 #include <string>
+#include <algorithm>
+
+#include "Star.h"
 
 class Heap {
 public:
     struct Entry {
-        std::string value;
-        float       score;
+        Star star;
+        float       distance;
     };
 
 private:
@@ -27,11 +30,12 @@ public:
     size_t       count() const;
     const Entry& lookup(size_t index) const;
     Entry        pop();
-    Entry        pushpop(const std::string& value, float score);
-    void         push(const std::string& value, float score);
+    Entry        pushpop(const Star& value, float score);
+    void         push(const Star& value, float score);
     const Entry& top() const;
 };
 
+double distanceFrom(double a, double b, double c);
 
 
 #endif
