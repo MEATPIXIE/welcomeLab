@@ -1,8 +1,10 @@
 
 #include "StarMap.h"
+#include "Helpers.h"
 
 
 StarMap::StarMap(std::istream& stream){
+    theUniverse = new vector<Star>;
     int count = 1;
     double x, y, z;
 
@@ -13,14 +15,14 @@ StarMap::StarMap(std::istream& stream){
         aStar.y = y;
         aStar.z = z;
         aStar.id = count;
-        myStars->push_back(aStar);
+        theUniverse->push_back(aStar);
         
         count++;
     }
 }
 
 StarMap::~StarMap(){
-    delete myStars;
+    delete theUniverse;
 }
 
 
@@ -30,7 +32,24 @@ StarMap* StarMap::create(std::istream& stream) {
   return new StarMap(stream);
 }
 
+
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
+    
+    Heap distanceStars = Heap(n);
     std::vector<Star> mine;
+    for(Star estrella : *theUniverse){
+        float distance = distanceFrom(x, y, z);
+        if (distanceStars.capacity() != distanceStars.count()){
+            distanceStars.push(estrella, distance); 
+        }else if (distance < distanceStars.top().distance){
+            distanceStars.pushpop(estrella, distance);
+        }
+    }
+    
+    while(distanceStars.count() != 0){
+        mine.push_back(distanceStars.pop().star);
+    }
+    reverse(mine.begin(), mine.end());
+
     return mine;
 }
