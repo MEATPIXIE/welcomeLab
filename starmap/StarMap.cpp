@@ -4,7 +4,7 @@
 
 
 StarMap::StarMap(std::istream& stream){
-    theUniverse = new vector<Star>;
+    theUniverse = new std::vector<Star>;
     int count = 1;
     double x, y, z;
 
