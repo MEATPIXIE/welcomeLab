@@ -2,6 +2,7 @@
 #include "Helpers.h"
 
 #include <stdexcept>
+#include <cmath>
 using namespace std;
 
 
@@ -53,8 +54,9 @@ const Heap::Entry& Heap::top() const{
         return mData[0];
     }
 }
-void Heap::push(const std::string & value, float score){
-    Entry var = {value, score};
+////////////////////////////////////////////////////////////////////////////////
+void Heap::push(const Star& value, float distance){
+    Entry var = {value, distance};
     if (mCount > mCapacity){
         throw overflow_error("OE");
     }else if(count() == capacity()){
@@ -63,7 +65,7 @@ void Heap::push(const std::string & value, float score){
         size_t ours = mCount;
         mData[ours] = var;
         mCount++;
-        while(mData[(ours - 1)/2].score > mData[ours].score && ours != 0){
+        while(mData[(ours - 1)/2].distance > mData[ours].distance && ours != 0){
             Entry theirs = mData[ours];
             mData[ours] = mData[(ours - 1)/2];
             mData[(ours - 1)/2] = theirs;
@@ -71,42 +73,7 @@ void Heap::push(const std::string & value, float score){
         }
     }
 }
-
-
-
-
-
 Heap::Entry Heap::pop(){
-    /*
-    Entry var = mData[0];
-    
-    if (mCount == 0){
-        throw underflow_error("UE");
-    }else{
-        mData[0] = mData[mCount - 1];
-        mCount--;
-        
-        size_t ours = 0;  
-        while(ours < mCount){
-            size_t first = ours * 2 + 1;
-            size_t second = ours * 2 + 2;
-            if (first >= mCount){
-                break;
-            }
-            if (second >= mCount){
-                if (mData[ours].score > mData[first].score){
-                    Entry temp = mData[ours];
-                    mData[ours] = mData[first];
-                    mData[first] = temp;
-                    ours = first;
-                }else{
-                    break;
-                }
-            }
-        }
-        return var;
-    }
-    */
     if (mCount == 0){
         throw underflow_error("UE");
     }else if(mCount == 1){
@@ -126,7 +93,7 @@ Heap::Entry Heap::pop(){
             break;
         }
         if (second >= mCount){
-            if (mData[ours].score > mData[first].score){
+            if (mData[ours].distance > mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
@@ -138,14 +105,14 @@ Heap::Entry Heap::pop(){
     }
     return var;
 }
-Heap::Entry Heap::pushpop(const std::string & value, float score){
+Heap::Entry Heap::pushpop(const Star& value, float distance){
     
     if (mCount == 0){
         throw underflow_error("UE");
     }
 
     Entry var = mData[0];
-    mData[0] = {value, score};
+    mData[0] = {value, distance};
     size_t ours = 0;   
     
     while(ours < mCount){
@@ -155,7 +122,7 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
             break;
         }
         if (second >= mCount){
-            if (mData[ours].score > mData[first].score){
+            if (mData[ours].distance > mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
@@ -165,12 +132,12 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
             }
         }
         else{
-            if (mData[ours].score > mData[first].score && mData[first].score <= mData[second].score){
+            if (mData[ours].distance > mData[first].distance && mData[first].distance <= mData[second].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
                 ours = first;
-            }else if (mData[ours].score > mData[second].score && mData[second].score <= mData[first].score){
+            }else if (mData[ours].distance > mData[second].distance && mData[second].distance <= mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[second];
                 mData[second] = temp;
@@ -180,6 +147,13 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
             }
         }
     }
-    
     return var;
 }
+////////////////////////////////////////////////////////////////////////////////
+
+double distanceFrom(double a, double b, double c){
+    double firstJump = sqrt(pow(a,2) + pow(b,2));
+    double secondJump = sqrt(pow(firstJump,2) + pow(c,2));
+    return secondJump;
+} 
+
