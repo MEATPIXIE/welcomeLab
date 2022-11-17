@@ -93,7 +93,7 @@ Heap::Entry Heap::pop(){
             break;
         }
         if (second >= mCount){
-            if (mData[ours].distance > mData[first].distance){
+            if (mData[ours].distance < mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
@@ -122,7 +122,7 @@ Heap::Entry Heap::pushpop(const Star& value, float distance){
             break;
         }
         if (second >= mCount){
-            if (mData[ours].distance > mData[first].distance){
+            if (mData[ours].distance < mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
@@ -132,12 +132,12 @@ Heap::Entry Heap::pushpop(const Star& value, float distance){
             }
         }
         else{
-            if (mData[ours].distance > mData[first].distance && mData[first].distance <= mData[second].distance){
+            if (mData[ours].distance < mData[first].distance && mData[first].distance >= mData[second].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[first];
                 mData[first] = temp;
                 ours = first;
-            }else if (mData[ours].distance > mData[second].distance && mData[second].distance <= mData[first].distance){
+            }else if (mData[ours].distance < mData[second].distance && mData[second].distance >= mData[first].distance){
                 Entry temp = mData[ours];
                 mData[ours] = mData[second];
                 mData[second] = temp;
@@ -156,4 +156,3 @@ double distanceFrom(double a, double b, double c){
     double secondJump = sqrt(pow(firstJump,2) + pow(c,2));
     return secondJump;
 } 
-
