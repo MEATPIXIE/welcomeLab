@@ -12,7 +12,7 @@ public:
     static StarMap* create(std::istream& stream);
 
 private:
-    std::vector<Star>* myStars;
+    std::vector<Star>* theUniverse;
 
 public:
     // Constructor & Destructor
