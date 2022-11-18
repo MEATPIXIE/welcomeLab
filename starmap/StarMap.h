@@ -1,4 +1,4 @@
-                                                                                                                                                                                                 #ifndef STARMAP_H
+                                                                                                                                                                                                     #ifndef STARMAP_H
 #define STARMAP_H
 
 #include "Star.h"
