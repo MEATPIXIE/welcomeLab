@@ -54,7 +54,6 @@ const Heap::Entry& Heap::top() const{
         return mData[0];
     }
 }
-
 void Heap::push(const Star& value, float distance){
     Entry var = {value, distance};
     if (mCount > mCapacity){
@@ -73,8 +72,6 @@ void Heap::push(const Star& value, float distance){
         }
     }
 }
-
-////////////////////////////////////////////////////////////////////////////////
 Heap::Entry Heap::pop(){
     if (mCount == 0){
         throw underflow_error("UE");
@@ -82,17 +79,14 @@ Heap::Entry Heap::pop(){
         mCount--;
         return mData[0];
     }
-
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
     mCount--;
     size_t ours = 0;   
-    
     while(ours < mCount){
         size_t first = (ours * 2) + 1;
         size_t second = (ours * 2) + 2;
         size_t largest = ours;
-
         if (first < mCount && mData[first].distance > mData[ours].distance){
             largest = first;
         }else{
@@ -110,18 +104,13 @@ Heap::Entry Heap::pop(){
     }
     return var;
 }
-////////////////////////////////////////////////////////////////////////////////
-
-Heap::Entry Heap::pushpop(const Star& value, float distance){
-    
+Heap::Entry Heap::pushpop(const Star& value, float distance){  
     if (mCount == 0){
         throw underflow_error("UE");
     }
-
     Entry var = mData[0];
     mData[0] = {value, distance};
     size_t ours = 0;   
-    
     while(ours < mCount){
         size_t first = ours * 2 + 1;
         size_t second = ours * 2 + 2;
@@ -156,10 +145,11 @@ Heap::Entry Heap::pushpop(const Star& value, float distance){
     }
     return var;
 }
-
-
 double distanceFrom(double a, double b, double c){
     double firstJump = sqrt(pow(a,2) + pow(b,2));
     double secondJump = sqrt(pow(firstJump,2) + pow(c,2));
     return secondJump;
 } 
+////////////////////////////////////////////////////////////////////////////////
+/////////////  HEAP ^  /////////////  K-DIMENTIONAL MAP v  ///////////////////////
+////////////////////////////////////////////////////////////////////////////////
