@@ -5,6 +5,8 @@
 #include <cstddef>
 #include <string>
 #include <algorithm>
+#include <cmath>
+
 
 #include "Star.h"
 
