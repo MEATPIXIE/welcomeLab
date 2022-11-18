@@ -54,7 +54,6 @@ const Heap::Entry& Heap::top() const{
         return mData[0];
     }
 }
-
 void Heap::push(const Star& value, float distance){
     Entry var = {value, distance};
     if (mCount > mCapacity){
@@ -80,17 +79,14 @@ Heap::Entry Heap::pop(){
         mCount--;
         return mData[0];
     }
-
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
     mCount--;
     size_t ours = 0;   
-    
     while(ours < mCount){
         size_t first = (ours * 2) + 1;
         size_t second = (ours * 2) + 2;
         size_t largest = ours;
-
         if (first < mCount && mData[first].distance > mData[ours].distance){
             largest = first;
         }else{
@@ -108,16 +104,13 @@ Heap::Entry Heap::pop(){
     }
     return var;
 }
-Heap::Entry Heap::pushpop(const Star& value, float distance){
-    
+Heap::Entry Heap::pushpop(const Star& value, float distance){  
     if (mCount == 0){
         throw underflow_error("UE");
     }
-
     Entry var = mData[0];
     mData[0] = {value, distance};
     size_t ours = 0;   
-    
     while(ours < mCount){
         size_t first = ours * 2 + 1;
         size_t second = ours * 2 + 2;
@@ -152,3 +145,79 @@ Heap::Entry Heap::pushpop(const Star& value, float distance){
     }
     return var;
 }
+/*
+double distanceFrom(double a, double b, double c){
+    double firstJump = sqrt(pow(a,2) + pow(b,2));
+    double secondJump = sqrt(pow(firstJump,2) + pow(c,2));
+    return secondJump;
+} 
+*/
+////////////////////////////////////////////////////////////////////////////////
+/////////////  HEAP ^  /////////////  K-DIMENTIONAL MAP v  /////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+/*
+const int k = 2 //3
+
+struct Node{
+    int point[k];
+    Node *left, *right;
+}
+struct Node* newNode(int arr[]){
+    struct Node* temp = new Node;
+
+    for (int i= 0; i< k; i++){
+        temp -> point[i] = arr[i];
+    }
+    temp->left = temp->right = NULL;
+    return temp;
+}
+
+// Insert new point with given point in KD Tree and return new root
+Node *insertRec(Node *root, int point[], unsigned depth){
+    if (root == NULL){
+       return newNode(point);
+    }
+    unsigned cd = depth % k; //x, y, or z?
+  
+    // Compare and decide left or right subtree
+    if (point[cd] < (root->point[cd]))
+        root->left  = insertRec(root->left, point, depth + 1);
+    else
+        root->right = insertRec(root->right, point, depth + 1);
+  
+    return root;
+}
+Node* insert(Node *root, int point[]){
+    return insertRec(root, point, 0);
+}
+
+// Searches a Point represented by "point[]" in the K D tree.
+bool searchRec(Node* root, int point[], unsigned depth){
+    if (root == NULL)
+        return false;
+    if (arePointsSame(root->point, point))
+        return true;
+  
+    // Current dimension is computed using current depth and total dimensions (k)
+    unsigned cd = depth % k;
+  
+    // Compare point with root with respect to cd (Current dimension)
+    if (point[cd] < root->point[cd]){
+        return searchRec(root->left, point, depth + 1);
+    }
+    return searchRec(root->right, point, depth + 1);
+}
+bool search(Node* root, int point[]){
+    return searchRec(root, point, 0);//Pass current depth as 0
+}
+
+bool arePointsSame(int point1[], int point2[]){
+    for(int i = 0; i < k; i++){
+        if (point1[i] != point2[i]){
+            return false;
+        }
+    }
+    return true;
+}
+*/
