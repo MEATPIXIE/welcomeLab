@@ -59,16 +59,15 @@ void Heap::push(const Star& value, float distance){
         throw overflow_error("OE");
     }else if(count() == capacity()){
         throw overflow_error("OE");
-    }else{
-        size_t ours = mCount;
-        mData[ours] = var;
-        mCount++;
-        while(mData[(ours - 1)/2].distance > mData[ours].distance && ours != 0){
-            Entry theirs = mData[ours];
-            mData[ours] = mData[(ours - 1)/2];
-            mData[(ours - 1)/2] = theirs;
-            ours = (ours - 1)/2;
-        }
+    }
+    size_t ours = mCount;
+    mData[ours] = var;
+    mCount++;
+    while(ours != 0 && mData[(ours - 1)/2].distance > mData[ours].distance){
+        Entry theirs = mData[ours];
+        mData[ours] = mData[(ours - 1)/2];
+        mData[(ours - 1)/2] = theirs;
+        ours = (ours - 1)/2;
     }
 }
 Heap::Entry Heap::pop(){
