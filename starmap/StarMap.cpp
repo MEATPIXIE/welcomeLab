@@ -36,9 +36,9 @@ StarMap* StarMap::create(std::istream& stream) {
 std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
     
     Heap distanceStars = Heap(n);
-    std::vector<Star> mine;
+    //std::vector<Star> mine;
     for(Star estrella : *theUniverse){
-        float distance = ((estrella.x - x) * (estrella.x - x)) + ((estrella.y - y) * (estrella.y - y)) + ((estrella.z - z) * (estrella.z - z));//distanceFrom(x, y, z);
+        float distance = sqrt(((estrella.x - x) * (estrella.x - x)) + ((estrella.y - y) * (estrella.y - y)) + ((estrella.z - z) * (estrella.z - z)));//distanceFrom(x, y, z);
         if (distanceStars.capacity() != distanceStars.count()){
             distanceStars.push(estrella, distance); 
         }else if (distance < distanceStars.top().distance){
