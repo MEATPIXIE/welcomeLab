@@ -90,7 +90,7 @@ Heap::Entry Heap::pop(){
         }else{
             largest = ours;
         }
-        if (second < mCount && mData[second].distance > mData[ours].distance){
+        if (second < mCount && mData[second].distance > mData[largest].distance){
             largest = second;
         }
         if (largest != ours){
