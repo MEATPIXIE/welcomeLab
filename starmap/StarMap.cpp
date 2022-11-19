@@ -39,10 +39,12 @@ std::vector<Star> StarMap::find(size_t n, float x, float y, float z){
     std::vector<Star> mine;
     for(Star estrella : *theUniverse){
         float distance = sqrt(((estrella.x - x) * (estrella.x - x)) + ((estrella.y - y) * (estrella.y - y)) + ((estrella.z - z) * (estrella.z - z)));//distanceFrom(x, y, z);
-        if (distanceStars.capacity() != distanceStars.count()){
+        if (distanceStars.count() != distanceStars.capacity()){
             distanceStars.push(estrella, distance); 
-        }else if (distance < distanceStars.top().distance){
-            distanceStars.pushpop(estrella, distance);
+        }else{
+            if (distance < distanceStars.top().distance){
+                distanceStars.pushpop(estrella, distance);
+            }
         }
     }
     
