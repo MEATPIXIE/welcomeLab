@@ -1,8 +1,6 @@
 #include "Atlas.h"
 
 Atlas::Atlas(std::istream& stream){
-    int count = 0;
-    return count;
 }
 
 Atlas::~Atlas(){
