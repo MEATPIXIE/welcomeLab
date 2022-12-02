@@ -26,7 +26,7 @@ Atlas::Atlas(std::istream& stream){
         
         if (id[0] == '-'){
             leer >> stringNum;
-            int Num = stoi(stringNum);
+            intNum = stoi(stringNum);
             leer >> std::ws;
             
             getline(leer, line);
