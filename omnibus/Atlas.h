@@ -3,8 +3,10 @@
 
 #include <istream>
 #include <string>
+#include <map>
 
 #include "Trip.h"
+#include "Helpers.h"
 
 
 class Atlas {
@@ -14,6 +16,7 @@ public:
 
 private:
   // Member Variables
+  std::map<std::string, Station*> atlas;
 
 public:
   // Constructor & Destructor
