@@ -1,8 +1,39 @@
+
 #include "Atlas.h"
+#include <sstream>
+#include <iomanip>
 
 Atlas::Atlas(std::istream& stream){
-    int count = 0;
-    count++;
+    std::string line;
+    std::string id;
+    std::string stationName;
+    std::string stringNum;
+    int intNum;
+    
+    std::string lineName;
+
+    while(getline(stream, line)){
+        std::istringstream newStream(line);
+        if(line[0] == '#' || line.empty()){
+            continue;
+        }
+        
+        istringstream leer(line);
+        leer >> id;
+        Station* newStation = new Station();
+        newStation->stationName = id;
+        
+        if (id[0] == '-'){
+            leer >> stringNum;
+            int Num = stoi(stringNum);
+            leer >> std::ws;
+            
+            getline(leer, line);
+            
+            newStation->transitLines.push_back(lineName);
+            newStation->neighbor.time = intNum;
+        }
+    }
 }
 
 Atlas::~Atlas(){
