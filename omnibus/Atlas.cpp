@@ -6,6 +6,9 @@ Atlas::Atlas(std::istream& stream){
 }
 
 Atlas::~Atlas(){
+  for(std::map<std::string, Station*>::iterator itr = atlas.begin(); itr != atlas.end(); itr++){
+    delete itr->second;
+  }
 }
 
 Atlas* Atlas::create(std::istream& stream) {
