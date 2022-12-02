@@ -1,3 +1,4 @@
+
 #include "Atlas.h"
 #include <sstream>
 #include <iomanip>
@@ -25,7 +26,7 @@ Atlas::Atlas(std::istream& stream){
         
         if (id[0] == '-'){
             leer >> stringNum;
-            intNum = stoi(stringNum);
+            int Num = stoi(stringNum);
             leer >> std::ws;
             
             getline(leer, line);
@@ -33,7 +34,7 @@ Atlas::Atlas(std::istream& stream){
             newStation->neighbor.time = intNum;
         }
         
-        atlas[id] = newStation;
+        atlas.insert({});
     }
 }
 
