@@ -1,7 +1,7 @@
-
 #include "Atlas.h"
 #include <sstream>
 #include <iomanip>
+
 
 Atlas::Atlas(std::istream& stream){
     std::string line;
@@ -25,16 +25,20 @@ Atlas::Atlas(std::istream& stream){
         
         if (id[0] == '-'){
             leer >> stringNum;
-            intNum = stoi(stringNum);
+            int Num = stoi(stringNum);
             leer >> std::ws;
             
             getline(leer, line);
-            
             newStation->transitLines.push_back(lineName);
             newStation->neighbor.time = intNum;
         }
+        
+        atlas[id] = newStation;
     }
 }
+
+
+
 
 Atlas::~Atlas(){
   for(std::map<std::string, Station*>::iterator itr = atlas.begin(); itr != atlas.end(); itr++){
