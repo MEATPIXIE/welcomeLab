@@ -1,7 +1,21 @@
 #ifndef HELPERS_H
 #define HELPERS_H
 
-// If you want to add any helper classes,
-// here's some space to do it in.
+#include <string>
+#include <vector>
+
+struct Station{
+    std::string stationName;
+
+    struct Neighbor{
+        Station* stationNeighbor;
+        int time;
+        std::string lineName;
+    };
+
+    Neighbor neighbor;
+
+    std::vector<std::string> transitLines;
+};
 
 #endif
