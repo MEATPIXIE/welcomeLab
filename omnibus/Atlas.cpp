@@ -3,7 +3,6 @@
 #include <sstream>
 #include <iomanip>
 
-
 Atlas::Atlas(std::istream& stream){
     std::string line;
     std::string id;
@@ -34,10 +33,9 @@ Atlas::Atlas(std::istream& stream){
             newStation->neighbor.time = intNum;
         }
         
-        atlas.insert({});
+        atlas.insert({id, newStation});
     }
 }
-
 
 
 
@@ -57,3 +55,4 @@ Trip Atlas::route(const std::string& src, const std::string& dst){
     Trip mine;
     return mine;
 }
+
