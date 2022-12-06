@@ -81,63 +81,33 @@ void Heap::push(const std::string & value, float score){
 
 
 Heap::Entry Heap::pop(){
-    /*
-    Entry var = mData[0];
-    
-    if (mCount == 0){
-        throw underflow_error("UE");
-    }else{
-        mData[0] = mData[mCount - 1];
-        mCount--;
-        
-        size_t ours = 0;  
-        while(ours < mCount){
-            size_t first = ours * 2 + 1;
-            size_t second = ours * 2 + 2;
-            if (first >= mCount){
-                break;
-            }
-            if (second >= mCount){
-                if (mData[ours].score > mData[first].score){
-                    Entry temp = mData[ours];
-                    mData[ours] = mData[first];
-                    mData[first] = temp;
-                    ours = first;
-                }else{
-                    break;
-                }
-            }
-        }
-        return var;
-    }
-    */
     if (mCount == 0){
         throw underflow_error("UE");
     }else if(mCount == 1){
         mCount--;
         return mData[0];
     }
-
     Entry var = mData[0];
     mData[0] = mData[mCount - 1];
     mCount--;
     size_t ours = 0;   
-    
     while(ours < mCount){
-        size_t first = ours * 2 + 1;
-        size_t second = ours * 2 + 2;
-        if (first >= mCount){
-            break;
+        size_t first = (ours * 2) + 1;
+        size_t second = (ours * 2) + 2;
+        size_t largest = ours;
+        if (first < mCount && mData[first].distance > mData[ours].distance){
+            largest = first;
+        }else{
+            largest = ours;
         }
-        if (second >= mCount){
-            if (mData[ours].score > mData[first].score){
-                Entry temp = mData[ours];
-                mData[ours] = mData[first];
-                mData[first] = temp;
-                ours = first;
-            }else{
-                break;
-            }
+        if (second < mCount && mData[second].distance > mData[largest].distance){
+            largest = second;
+        }
+        if (largest != ours){
+            swap(mData[ours], mData[largest]);
+            ours = largest;
+        }else{
+            break;
         }
     }
     return var;
