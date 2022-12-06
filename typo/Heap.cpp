@@ -103,10 +103,12 @@ Heap::Entry Heap::pop(){
         if (second > mCount && mData[second].score < mData[largest].score){
             largest = second;
         }
+        /*
         if (largest != ours){
             swap(mData[ours], mData[largest]);
             ours = largest;
-        }else{
+        }
+        */else{
             break;
         }
     }
