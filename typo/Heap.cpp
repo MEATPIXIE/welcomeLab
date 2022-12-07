@@ -134,12 +134,12 @@ Heap::Entry Heap::pop(){
         size_t first = (ours * 2) + 1;
         size_t second = (ours * 2) + 2;
         size_t largest = ours;
-        if (first < mCount && mData[first].score > mData[ours].score){
+        if (first < mCount && mData[first].score < mData[ours].score){
             largest = first;
         }else{
             largest = ours;
         }
-        if (second < mCount && mData[second].score > mData[largest].score){
+        if (second < mCount && mData[second].score < mData[largest].score){
             largest = second;
         }
         if (largest != ours){
@@ -151,4 +151,3 @@ Heap::Entry Heap::pop(){
     }
     return var;
 }
-
