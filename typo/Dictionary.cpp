@@ -42,6 +42,7 @@ Heap Dictionary::correct(const std::vector<Point>& points, size_t maxcount, floa
                 }else{
                     if(average > scores.top().score){
                         scores.pushpop(word, average);
+                    }
                 }
             }
         }
