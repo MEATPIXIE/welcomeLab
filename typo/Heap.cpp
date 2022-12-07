@@ -56,8 +56,6 @@ void Heap::push(const std::string & value, float score){
     Entry var = {value, score};
     if (mCount > mCapacity){
         throw overflow_error("OE");
-    }else if(count() == capacity()){
-        throw overflow_error("OE");
     }else{
         size_t ours = mCount;
         mData[ours] = var;
@@ -70,79 +68,6 @@ void Heap::push(const std::string & value, float score){
         }
     }
 }
-
-
-
-
-
-
-
-
-
-
-Heap::Entry Heap::pop(){
-    /*
-    Entry var = mData[0];
-    
-    if (mCount == 0){
-        throw underflow_error("UE");
-    }else{
-        mData[0] = mData[mCount - 1];
-        mCount--;
-        
-        size_t ours = 0;  
-        while(ours < mCount){
-            size_t first = ours * 2 + 1;
-            size_t second = ours * 2 + 2;
-            if (first >= mCount){
-                break;
-            }
-            if (second >= mCount){
-                if (mData[ours].score > mData[first].score){
-                    Entry temp = mData[ours];
-                    mData[ours] = mData[first];
-                    mData[first] = temp;
-                    ours = first;
-                }else{
-                    break;
-                }
-            }
-        }
-        return var;
-    }
-    */
-    if (mCount == 0){
-        throw underflow_error("UE");
-    }else if(mCount == 1){
-        mCount--;
-        return mData[0];
-    }
-
-    Entry var = mData[0];
-    mData[0] = mData[mCount - 1];
-    mCount--;
-    size_t ours = 0;   
-    
-    while(ours < mCount){
-        size_t first = ours * 2 + 1;
-        size_t second = ours * 2 + 2;
-        if (first >= mCount){
-            break;
-        }
-        if (second >= mCount){
-            if (mData[ours].score > mData[first].score){
-                Entry temp = mData[ours];
-                mData[ours] = mData[first];
-                mData[first] = temp;
-                ours = first;
-            }else{
-                break;
-            }
-        }
-    }
-    return var;
-}
-
 Heap::Entry Heap::pushpop(const std::string & value, float score){
     
     if (mCount == 0){
@@ -188,3 +113,42 @@ Heap::Entry Heap::pushpop(const std::string & value, float score){
     
     return var;
 }
+
+
+
+
+
+
+Heap::Entry Heap::pop(){
+    if (mCount == 0){
+        throw underflow_error("UE");
+    }else if(mCount == 1){
+        mCount--;
+        return mData[0];
+    }
+    Entry var = mData[0];
+    mData[0] = mData[mCount - 1];
+    mCount--;
+    size_t ours = 0;   
+    while(ours < mCount){
+        size_t first = (ours * 2) + 1;
+        size_t second = (ours * 2) + 2;
+        size_t largest = ours;
+        if (first < mCount && mData[first].score > mData[ours].score){
+            largest = first;
+        }else{
+            largest = ours;
+        }
+        if (second < mCount && mData[second].score > mData[largest].score){
+            largest = second;
+        }
+        if (largest != ours){
+            swap(mData[ours], mData[largest]);
+            ours = largest;
+        }else{
+            break;
+        }
+    }
+    return var;
+}
+
