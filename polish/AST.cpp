@@ -1,176 +1,155 @@
+
 #include "AST.h"
 #include "Nodes.h"
 #include <sstream>
 #include "Stack.h"
 
+using namespace std;
+
 AST* AST::parse(const std::string& expression) {
-    std::istringstream mystream(expression);
-    std::string token;
+    istringstream mystream(expression);
+    string token;
     Stack c;
     while(mystream >> token){
         if(token == "+"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
-                    AST* temp = c.top();
+            if(c.count < 2){ //fix this
+                while(!c.isEmpty()){
+                    AST* yuh = c.top();
                     c.pop();
-                    delete temp;
+                    delete yuh;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw runtime_error("NEO");
             }
-            */
-            Add* Adder = new Add;
-            AST* rightN = c.top();
-            Adder->right = rightN;
+            Add* aNode = new Add;
+            AST* rNode = c.top();
+            aNode->right = rNode;
             c.pop();
-            AST* leftN = c.top();
-            Adder->left = leftN;
+            AST* lNode = c.top();
+            aNode->left = lNode;
             c.pop();
-            c.push(Adder);
+            c.push(aNode);
             continue;
-        }
-        
-        else if(token == "-"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
+        }else if(token == "-"){
+            if(c.count < 2){
+                while(!c.isEmpty()){
                     AST* temp = c.top();
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error("NEO");
             }
-            */
-            Sub* Subber = new Sub;
-            AST* rightN = c.top();
-            Subber->right = rightN;
+            Sub* sNode = new Sub;
+            AST* rNode = c.top();
+            sNode->right = rNode;
             c.pop();
-            AST* leftN = c.top();
-            Subber->left = leftN;
+            AST* lNode = c.top();
+            sNode->left = lNode;
             c.pop();
-            c.push(Subber);
+            c.push(sNode);
             continue;
-        }
-        
-        else if(token == "*"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
+        }else if(token == "*"){
+            if(c.count < 2){
+                while(!c.isEmpty()){
                     AST* temp = c.top();
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error("NEO");
             }
-            */
-            Mul* Multer = new Mul;
-            AST* rightN = c.top();
-            Multer->right = rightN;
+            Mul* mNode = new Mul;
+            AST* rNode = c.top();
+            mNode->right = rNode;
             c.pop();
-            AST* leftN = c.top();
-            Multer->left = leftN;
+            AST* lNode = c.top();
+            mNode->left = lNode;
             c.pop();
-            c.push(Multer);
+            c.push(mNode);
             continue;
-        }
-        
-        else if(token == "/"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
+        }else if(token == "/"){
+            if(c.count < 2){
+                while(!c.isEmpty()){
                     AST* temp = c.top();
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error("NEO");
             }
-            */
-            Div* Divide = new Div;
-            AST* rightN = c.top();
-            Divide->right = rightN;
+            Div* dNode = new Div;
+            AST* rNode = c.top();
+            dNode->right = rNode;
             c.pop();
-            AST* leftN = c.top();
-            Divide->left = leftN;
+            AST* lNode = c.top();
+            dNode->left = lNode;
             c.pop();
-            c.push(Divide);
+            c.push(dNode);
             continue;
-        }
-        
-        else if(token == "%"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
+        }else if(token == "%"){
+            if(c.count < 2){
+                while(!c.isEmpty()){
                     AST* temp = c.top();
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error("NEO");
             }
-            */
-            Rem* Remain = new Rem;
-            AST* rightN = c.top();
-            Remain->right = rightN;
+            Rem* remNode = new Rem;
+            AST* rNode = c.top();
+            remNode->right = rNode;
             c.pop();
-            AST* leftN = c.top();
-            Remain->left = leftN;
+            AST* lNode = c.top();
+            remNode->left = lNode;
             c.pop();
-            c.push(Remain);
+            c.push(remNode);
             continue;
-        }
-        else if(token == "~"){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
+        }else if(token == "~"){
+            if(c.count < 2){
+                while(!c.isEmpty()){
                     AST* temp = c.top();
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error("NEO");
             }
-            */
-            Neg* Negate = new Neg;
-            AST* leftN = c.top();
-            Negate->left = leftN;
+            Neg* nNode = new Neg;
+            nNode->left = c.top();
             c.pop();
-            c.push(Negate);
+            c.push(nNode);
             continue;
-        }
-        
-        else{ //if(token >= 0 && token <= 9){
-            /*
-            if(c.topp < 2){
-                while(c.topp > 0){
-                    AST* temp = c.top();
-                    c.pop();
-                    delete temp;
+        }else{
+            string::size_type readSize;
+            string error = "Invalid";
+            try{
+                double final = stod(token, &readSize);
+                if(readSize != token.length()){
+                    while(!c.isEmpty()){
+                        AST* yuh = c.top();
+                        c.pop();
+                        delete yuh;
                 }
-                throw std::runtime_error("Not enough operands.");
-            }
-            */
-            Number* nummm = new Number;
-            AST* rightN = c.top();
-            nummm->right = rightN;
-            c.pop();
-            AST* leftN = c.top();
-            nummm->left = leftN;
-            c.pop();
-            c.push(nummm);
-            continue;
-        }
-        /*    
-        else{
-            
-            if(c.topp < 2){
-                while(c.topp > 0){
-                    AST* temp = c.top();
-                    c.pop();
-                    delete temp;
+                    throw std::runtime_error("NEO");
                 }
-                
-                throw std::runtime_error("Invalid token: XXX");
-            }
+                Number* lNode = new Number(final);
+                c.push(lNode);
+            }catch(...){
+                while(!c.isEmpty()){
+                    AST* yuh = c.top();
+                    c.pop();
+                    delete yuh;
+                }
+                throw std::runtime_error("NEO");
+                }
         }
-        */
+    }
+    if(c.count == 0){
+        throw std::runtime_error("NEO");
+    }
+    if(c.count > 1){
+        while(!c.isEmpty()){
+            AST* yuh = c.top();
+            c.pop();
+            delete yuh;
+        }
+        throw std::runtime_error("NEO");
     }
     return c.top();
-}
+}            
