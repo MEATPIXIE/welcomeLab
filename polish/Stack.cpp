@@ -8,42 +8,46 @@ Stack::Stack(){
 }
 
 Stack::~Stack() {
-    Node* next;
+    Node* curr;
     while(topp != NULL){
-        next = topp->next;
+        curr = topp->next;
         delete topp;
-        topp = next;
+        topp = curr;
     }
+    this->count = 0;
 }
 
 void Stack::push(AST* token){
-    Node* n = new Node;
-    if(topp == NULL){
-        n->data = token;
-        n->next = NULL;
-        topp = n;
+    struct Node* yuh = new Node(token);
+    if(!topp){
+        topp = yuh;
     }else{
-        n->data = token;
-        n->next = topp;
-        topp = n;
+        yuh->next = topp;
+        topp = yuh;
     }
 }
 
-AST* Stack::pop(){
-    AST* node = topp->data;
+void Stack::pop(){
+    Node* yuh;
     if(topp == NULL){
-        return NULL;
+        throw out_of_range("Empty");
     }else{
-        Node* temp;
-        temp = topp;
-        topp = topp->next;
-        delete temp;
-        temp = NULL;
+        yuh = topp->next;
+        delete topp;
+        topp = yuh;
     }
-    return node;
+    this->count--;
+}
+
+
+
+bool Stack::isEmpty() const{
+    return topp == NULL;
 }
 
 AST* Stack::top(){
-    AST* node = topp->data;
-    return node;
+    if (!this->isEmpty()){
+        return topp->data;
+    }
+    throw out_of_range("Empty");
 }
