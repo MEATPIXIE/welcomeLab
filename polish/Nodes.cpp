@@ -84,7 +84,7 @@ Div::~Div(){
     delete right;
 }
 double Div::value() const{
-    if(this->right->value == 0){
+    if(this->right->value() == 0){
         throw std::runtime_error("Division by zero."); 
     }else{
         return this->left->value() / this->right->value();
