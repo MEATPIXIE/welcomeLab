@@ -3,7 +3,8 @@
 
 #include <sstream>
 
-Number::Number(){
+Number::Number(double token){
+    this->data = token;
 }
 
 std::string Number::prefix() const{
@@ -125,4 +126,3 @@ std::string Neg::prefix() const{
 std::string Neg::postfix() const{
     return left->postfix() + " ~";
 }
-
