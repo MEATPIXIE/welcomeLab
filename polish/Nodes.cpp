@@ -84,7 +84,11 @@ Div::~Div(){
     delete right;
 }
 double Div::value() const{
-    return this->left->value() / this->right->value();
+    if(this->right->value == 0){
+        throw std::runtime_error("Division by zero."); 
+    }else{
+        return this->left->value() / this->right->value();
+    }
 }
 std::string Div::prefix() const{
     return "/ " + left->prefix() + " " + right->prefix();
