@@ -72,7 +72,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
             }
             Div* dNode = new Div;
             AST* rNode = c.top();
@@ -153,4 +153,3 @@ AST* AST::parse(const std::string& expression) {
     }
     return c.top();
 }            
-           
