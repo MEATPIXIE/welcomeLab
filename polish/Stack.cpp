@@ -25,6 +25,7 @@ void Stack::push(AST* token){
         yuh->next = topp;
         topp = yuh;
     }
+    count++;
 }
 
 void Stack::pop(){
