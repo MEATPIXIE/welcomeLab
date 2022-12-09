@@ -7,7 +7,7 @@ class Number: public AST{
 public:
     AST* left;
     AST* right;
-    Number();
+    Number(double token);
     std::string prefix() const;
     std::string postfix() const;
     double value() const;
