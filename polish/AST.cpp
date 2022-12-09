@@ -141,7 +141,7 @@ AST* AST::parse(const std::string& expression) {
         }
     }
     if(c.count == 0){
-        throw std::runtime_error("NEO");
+        throw std::runtime_error("No input.");
     }
     if(c.count > 1){
         while(!c.isEmpty()){
@@ -149,7 +149,7 @@ AST* AST::parse(const std::string& expression) {
             c.pop();
             delete yuh;
         }
-        throw std::runtime_error("NEO");
+        throw std::runtime_error("Too many operands.");
     }
     return c.top();
-}            
+}                      
