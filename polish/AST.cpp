@@ -18,7 +18,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete yuh;
                 }
-                throw runtime_error("NEO");
+                throw runtime_error("Not enough operands.");
             }
             Add* aNode = new Add;
             AST* rNode = c.top();
@@ -36,7 +36,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
             }
             Sub* sNode = new Sub;
             AST* rNode = c.top();
@@ -117,7 +117,7 @@ AST* AST::parse(const std::string& expression) {
             continue;
         }else{
             string::size_type readSize;
-            string error = "Invalid";
+            string error = "Invalid token: " + token;
             try{
                 double final = stod(token, &readSize);
                 if(readSize != token.length()){
@@ -152,4 +152,5 @@ AST* AST::parse(const std::string& expression) {
         throw std::runtime_error("Too many operands.");
     }
     return c.top();
-}                      
+}            
+           
