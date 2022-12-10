@@ -2,6 +2,7 @@
 #include "Nodes.h"
 
 #include <sstream>
+#include <cmath>
 
 Number::Number(double token){
     this->data = token;
@@ -105,7 +106,15 @@ Rem::~Rem(){
     delete right;
 }
 double Rem::value() const{
-    return 0;//this->left->value() % this->right->value();
+    if(this->right->value() == 0){
+        throw std::runtime_error("Division by zero."); 
+    }else{
+        double mine, a, b;
+        a = this->left->value();
+        b = this->right->value();
+        mine = remainder(a, b);
+        return mine;
+    }
 }
 std::string Rem::prefix() const{
     return "% " + left->prefix() + " " + right->prefix();
