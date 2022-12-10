@@ -136,7 +136,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete yuh;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw std::runtime_error(error);
                 }
         }
     }
@@ -153,3 +153,4 @@ AST* AST::parse(const std::string& expression) {
     }
     return c.top();
 }            
+
