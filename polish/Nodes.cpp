@@ -3,6 +3,7 @@
 
 #include <sstream>
 #include <cmath>
+#include <math.h>
 
 Number::Number(double token){
     this->data = token;
@@ -112,7 +113,9 @@ double Rem::value() const{
         double mine, a, b;
         a = this->left->value();
         b = this->right->value();
-        mine = remainder(a, b);
+
+        mine = fmod(a, b);
+
         return mine;
     }
 }
