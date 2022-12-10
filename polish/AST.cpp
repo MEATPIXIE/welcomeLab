@@ -36,7 +36,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw runtime_error("Not enough operands.");
             }
             Sub* sNode = new Sub;
             AST* rNode = c.top();
@@ -54,7 +54,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw runtime_error("Not enough operands.");
             }
             Mul* mNode = new Mul;
             AST* rNode = c.top();
@@ -72,7 +72,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw runtime_error("Not enough operands.");
             }
             Div* dNode = new Div;
             AST* rNode = c.top();
@@ -90,7 +90,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("Not enough operands.");
+                throw runtime_error("Not enough operands.");
             }
             Rem* remNode = new Rem;
             AST* rNode = c.top();
@@ -102,13 +102,8 @@ AST* AST::parse(const std::string& expression) {
             c.push(remNode);
             continue;
         }else if(token == "~"){
-            if(c.count < 2){
-                while(!c.isEmpty()){
-                    AST* temp = c.top();
-                    c.pop();
-                    delete temp;
-                }
-                throw std::runtime_error("Not enough operands.");
+            if(c.count == 0){
+                throw runtime_error("Not enough operands.");
             }
             Neg* nNode = new Neg;
             nNode->left = c.top();
@@ -126,7 +121,7 @@ AST* AST::parse(const std::string& expression) {
                         c.pop();
                         delete yuh;
                 }
-                    throw std::runtime_error(error);
+                    throw runtime_error(error);
                 }
                 Number* lNode = new Number(final);
                 c.push(lNode);
@@ -136,12 +131,12 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete yuh;
                 }
-                throw std::runtime_error(error);
+                throw runtime_error(error);
                 }
         }
     }
     if(c.count == 0){
-        throw std::runtime_error("No input.");
+        throw runtime_error("No input.");
     }
     if(c.count > 1){
         while(!c.isEmpty()){
@@ -149,7 +144,7 @@ AST* AST::parse(const std::string& expression) {
             c.pop();
             delete yuh;
         }
-        throw std::runtime_error("Too many operands.");
+        throw runtime_error("Too many operands.");
     }
     return c.top();
 }   
