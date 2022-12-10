@@ -116,7 +116,7 @@ size_t Set::insert(const std::string& value){
 }
 
 Node* mineaf(Node* root){
-    root = root->left
+    root = root->left;
     while(root->right != NULL){ 
 	    root = root->right;
     }
