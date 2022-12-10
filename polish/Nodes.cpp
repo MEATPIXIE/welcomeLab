@@ -112,7 +112,7 @@ double Rem::value() const{
         double mine, a, b;
         a = this->left->value();
         b = this->right->value();
-        mine = remainder(a, b);
+        mine = remainder(b, a);
         return mine;
     }
 }
