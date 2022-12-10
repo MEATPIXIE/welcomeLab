@@ -11,28 +11,6 @@ AST* AST::parse(const std::string& expression) {
     string token;
     Stack c;
     while(mystream >> token){
-        string::size_type readSize;
-        string error = "Invalid token: " + token;
-        try{
-            double final = stod(token, &readSize);
-            if(readSize != token.length()){
-                while(!c.isEmpty()){
-                    AST* yuh = c.top();
-                    c.pop();
-                    delete yuh;
-                }
-                throw std::runtime_error(error);
-            }
-            Number* lNode = new Number(final);
-            c.push(lNode);
-        }catch(...){
-            while(!c.isEmpty()){
-                AST* yuh = c.top();
-                c.pop();
-                delete yuh;
-            }
-            throw std::runtime_error(error);
-        }
         if(token == "+"){
             if(c.count < 2){ //fix this
                 while(!c.isEmpty()){
@@ -137,6 +115,29 @@ AST* AST::parse(const std::string& expression) {
             c.pop();
             c.push(nNode);
             continue;
+        }else{
+            string::size_type readSize;
+            string error = "Invalid token: " + token;
+            try{
+                double final = stod(token, &readSize);
+                if(readSize != token.length()){
+                    while(!c.isEmpty()){
+                        AST* yuh = c.top();
+                        c.pop();
+                        delete yuh;
+                }
+                    throw std::runtime_error(error);
+                }
+                Number* lNode = new Number(final);
+                c.push(lNode);
+            }catch(...){
+                while(!c.isEmpty()){
+                    AST* yuh = c.top();
+                    c.pop();
+                    delete yuh;
+                }
+                throw std::runtime_error(error);
+                }
         }
     }
     if(c.count == 0){
@@ -151,4 +152,4 @@ AST* AST::parse(const std::string& expression) {
         throw std::runtime_error("Too many operands.");
     }
     return c.top();
-}            
+}   
