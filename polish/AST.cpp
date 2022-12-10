@@ -7,10 +7,10 @@
 using namespace std;
 
 AST* AST::parse(const std::string& expression) {
-    istringstream mystream(expression);
+    istringstream leer(expression);
     string token;
     Stack c;
-    while(mystream >> token){
+    while(leer >> token){
         if(token == "+"){
             if(c.count < 2){ //fix this
                 while(!c.isEmpty()){
@@ -114,31 +114,30 @@ AST* AST::parse(const std::string& expression) {
             string::size_type readSize;
             string error = "Invalid token: " + token;
             try{
-                double final = stod(token, &readSize);
+                double end = stod(token, &readSize);
                 if(readSize != token.length()){
                     while(!c.isEmpty()){
                         AST* yuh = c.top();
                         c.pop();
                         delete yuh;
-                }
+                    }
                     throw runtime_error(error);
                 }
-                Number* lNode = new Number(final);
+                Number* lNode = new Number(end);
                 c.push(lNode);
             }catch(...){
                 while(!c.isEmpty()){
                     AST* yuh = c.top();
                     c.pop();
                     delete yuh;
-                }
+                    }
                 throw runtime_error(error);
                 }
         }
     }
     if(c.count == 0){
         throw runtime_error("No input.");
-    }
-    if(c.count > 1){
+    }else if(c.count > 1){
         while(!c.isEmpty()){
             AST* yuh = c.top();
             c.pop();
