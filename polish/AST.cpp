@@ -54,7 +54,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
             }
             Mul* mNode = new Mul;
             AST* rNode = c.top();
@@ -90,7 +90,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
             }
             Rem* remNode = new Rem;
             AST* rNode = c.top();
@@ -108,7 +108,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete temp;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
             }
             Neg* nNode = new Neg;
             nNode->left = c.top();
@@ -126,7 +126,7 @@ AST* AST::parse(const std::string& expression) {
                         c.pop();
                         delete yuh;
                 }
-                    throw std::runtime_error("NEO");
+                    throw std::runtime_error("Not enough operands.");
                 }
                 Number* lNode = new Number(final);
                 c.push(lNode);
@@ -136,7 +136,7 @@ AST* AST::parse(const std::string& expression) {
                     c.pop();
                     delete yuh;
                 }
-                throw std::runtime_error("NEO");
+                throw std::runtime_error("Not enough operands.");
                 }
         }
     }
