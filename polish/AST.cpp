@@ -24,6 +24,7 @@ AST* AST::parse(const std::string& expression) {
             AST* rNode = c.top();
             aNode->right = rNode;
             c.pop();
+            
             AST* lNode = c.top();
             aNode->left = lNode;
             c.pop();
@@ -32,9 +33,9 @@ AST* AST::parse(const std::string& expression) {
         }else if(token == "-"){
             if(c.count < 2){
                 while(!c.isEmpty()){
-                    AST* temp = c.top();
+                    AST* yuh = c.top();
                     c.pop();
-                    delete temp;
+                    delete yuh;
                 }
                 throw runtime_error("Not enough operands.");
             }
@@ -42,6 +43,7 @@ AST* AST::parse(const std::string& expression) {
             AST* rNode = c.top();
             sNode->right = rNode;
             c.pop();
+
             AST* lNode = c.top();
             sNode->left = lNode;
             c.pop();
@@ -50,9 +52,9 @@ AST* AST::parse(const std::string& expression) {
         }else if(token == "*"){
             if(c.count < 2){
                 while(!c.isEmpty()){
-                    AST* temp = c.top();
+                    AST* yuh = c.top();
                     c.pop();
-                    delete temp;
+                    delete yuh;
                 }
                 throw runtime_error("Not enough operands.");
             }
@@ -60,6 +62,7 @@ AST* AST::parse(const std::string& expression) {
             AST* rNode = c.top();
             mNode->right = rNode;
             c.pop();
+
             AST* lNode = c.top();
             mNode->left = lNode;
             c.pop();
@@ -68,9 +71,9 @@ AST* AST::parse(const std::string& expression) {
         }else if(token == "/"){
             if(c.count < 2){
                 while(!c.isEmpty()){
-                    AST* temp = c.top();
+                    AST* yuh = c.top();
                     c.pop();
-                    delete temp;
+                    delete yuh;
                 }
                 throw runtime_error("Not enough operands.");
             }
@@ -78,6 +81,7 @@ AST* AST::parse(const std::string& expression) {
             AST* rNode = c.top();
             dNode->right = rNode;
             c.pop();
+
             AST* lNode = c.top();
             dNode->left = lNode;
             c.pop();
@@ -86,9 +90,9 @@ AST* AST::parse(const std::string& expression) {
         }else if(token == "%"){
             if(c.count < 2){
                 while(!c.isEmpty()){
-                    AST* temp = c.top();
+                    AST* yuh = c.top();
                     c.pop();
-                    delete temp;
+                    delete yuh;
                 }
                 throw runtime_error("Not enough operands.");
             }
@@ -96,6 +100,7 @@ AST* AST::parse(const std::string& expression) {
             AST* rNode = c.top();
             remNode->right = rNode;
             c.pop();
+
             AST* lNode = c.top();
             remNode->left = lNode;
             c.pop();
